@@ -1,0 +1,24 @@
+version: '3'
+services:
+  db:
+    image: mariadb:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_DATABASE: products
+      MYSQL_USER: products
+      MYSQL_PASSWORD: 123456
+    ports:
+      - "3306:3306"
+    volumes:
+      - ../scripts/products.sql:/docker-entrypoint-initdb.d/products.sql
+  redis:
+    image: redis
+    volumes:
+      - ./data/redis:/data
+    ports:
+      - "6379:6379"
+  memcached:
+    image: memcached
+    ports:
+      - "11211:11211"
+    
