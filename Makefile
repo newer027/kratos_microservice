@@ -39,8 +39,8 @@ pubdash:
 	 done
 .PHONY: disbuild
 disbuild:
-	GOOS=linux GOARCH="amd64" go build -o dist/discovery-linux-amd64 ./scripts/discovery/cmd/discovery/; \
-	GOOS=darwin GOARCH="amd64" go build -o dist/discovery-darwin-amd64 ./scripts/discovery/cmd/discovery/
+	GOOS=linux GOARCH="amd64" go build -o dist/discovery-linux-amd64 ./apps/discovery/cmd/discovery/; \
+	GOOS=darwin GOARCH="amd64" go build -o dist/discovery-darwin-amd64 ./apps/discovery/cmd/discovery/
 .PHONY: build
 build:
 	for app in $(apps) ;\
