@@ -9,7 +9,7 @@ require (
 	github.com/google/wire v0.4.0
 	github.com/pkg/errors v0.9.1
 	github.com/smartystreets/goconvey v1.6.4
-	golang.org/x/sync v0.0.0-20190911185100-cd5d95a43a6e
-	google.golang.org/grpc v1.25.1
+	golang.org/x/sync v0.0.0-20200317015054-43a5402ce75a
+	google.golang.org/grpc v1.28.1
 	gopkg.in/h2non/gock.v1 v1.0.15
 )

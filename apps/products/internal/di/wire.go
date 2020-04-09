@@ -10,12 +10,10 @@ import (
 
 	"github.com/newer027/kratos_microservice/apps/products/internal/dao"
 
-	"github.com/newer027/kratos_microservice/apps/products/internal/server/grpc"
-
 	"github.com/google/wire"
 )
 
 //go:generate kratos t wire
 func InitApp() (*App, func(), error) {
-	panic(wire.Build(dao.Provider, service.New, http.New, grpc.New, NewApp))
+	panic(wire.Build(dao.Provider, service.New, http.New, NewApp))
 }
