@@ -6,8 +6,6 @@ import (
 	"os/signal"
 	"syscall"
 	"time"
-	"context"
-
 	"github.com/newer027/kratos_microservice/apps/products/internal/di"
 	"github.com/go-kratos/kratos/pkg/naming/discovery"
 	"github.com/go-kratos/kratos/pkg/net/rpc/warden/resolver"
@@ -39,9 +37,6 @@ func main() {
 		log.Info("get a signal %s", s.String())
 		switch s {
 		case syscall.SIGQUIT, syscall.SIGTERM, syscall.SIGINT:
-			if cancel != nil {
-				cancel()
-			}
 			closeFunc()
 			log.Info("products exit")
 			time.Sleep(time.Second)

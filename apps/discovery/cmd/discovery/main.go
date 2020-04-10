@@ -7,10 +7,10 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/newer027/kratos_microservice/apps/discovery/conf"
-	"github.com/newer027/kratos_microservice/apps/discovery"
-	"github.com/newer027/kratos_microservice/apps/discovery/http"
 	log "github.com/go-kratos/kratos/pkg/log"
+	"github.com/newer027/kratos_microservice/apps/discovery/conf"
+	"github.com/newer027/kratos_microservice/apps/discovery/discovery"
+	"github.com/newer027/kratos_microservice/apps/discovery/http"
 )
 
 func main() {
