@@ -2,10 +2,25 @@
 # This is a TOML document. Boom~
 demoExpire = "24h"
 
+
 [grpcClient]
     [grpcClient.details]
 		addr = "discovery://default/Details"
 		# addr = "direct://default/127.0.0.1:9000"
         [grpcClient.details.wardenconf]
+            dial = "3000ms"
+            timeout = "5000ms"
+            
+    [grpcClient.ratings]
+		addr = "discovery://default/Ratings"
+		# addr = "direct://default/127.0.0.1:9001"
+        [grpcClient.ratings.wardenconf]
+            dial = "3000ms"
+            timeout = "5000ms"
+
+    [grpcClient.reviews]
+		addr = "discovery://default/Reviews"
+		# addr = "direct://default/127.0.0.1:9002"
+        [grpcClient.reviews.wardenconf]
             dial = "3000ms"
             timeout = "5000ms"

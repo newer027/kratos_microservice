@@ -1,4 +1,4 @@
-apps = 'products' 'details'
+apps = 'products' 'details' 'ratings' 'reviews'
 .PHONY: run
 run: proto wire
 	for app in $(apps) ;\
@@ -64,3 +64,8 @@ rules:
 docker-compose: disbuild build dash rules
 	docker-compose -f deployments/docker-compose.yml up --build -d
 all: lint cover docker
+
+
+.PHONY: disdocker
+docker-compose-dis: disbuild
+	docker-compose -f deployments/docker-compose-dis.yml up --build -d

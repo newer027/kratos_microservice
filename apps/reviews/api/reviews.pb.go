@@ -10,6 +10,7 @@ import (
 	timestamp "github.com/golang/protobuf/ptypes/timestamp"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
+	empty "github.com/golang/protobuf/ptypes/empty"
 	status "google.golang.org/grpc/status"
 	math "math"
 )
@@ -206,6 +207,7 @@ const _ = grpc.SupportPackageIsVersion4
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type ReviewsClient interface {
+	Ping(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (*empty.Empty, error)
 	Query(ctx context.Context, in *QueryReviewsRequest, opts ...grpc.CallOption) (*QueryReviewsResponse, error)
 }
 
@@ -215,6 +217,15 @@ type reviewsClient struct {
 
 func NewReviewsClient(cc *grpc.ClientConn) ReviewsClient {
 	return &reviewsClient{cc}
+}
+
+func (c *reviewsClient) Ping(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (*empty.Empty, error) {
+	out := new(empty.Empty)
+	err := c.cc.Invoke(ctx, "/Reviews/Ping", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *reviewsClient) Query(ctx context.Context, in *QueryReviewsRequest, opts ...grpc.CallOption) (*QueryReviewsResponse, error) {
@@ -229,10 +240,15 @@ func (c *reviewsClient) Query(ctx context.Context, in *QueryReviewsRequest, opts
 // ReviewsServer is the server API for Reviews service.
 type ReviewsServer interface {
 	Query(context.Context, *QueryReviewsRequest) (*QueryReviewsResponse, error)
+	Ping(context.Context, *empty.Empty) (*empty.Empty, error)
 }
 
 // UnimplementedReviewsServer can be embedded to have forward compatible implementations.
 type UnimplementedReviewsServer struct {
+}
+
+func (*UnimplementedReviewsServer) Ping(ctx context.Context, req *empty.Empty) (*empty.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Ping not implemented")
 }
 
 func (*UnimplementedReviewsServer) Query(ctx context.Context, req *QueryReviewsRequest) (*QueryReviewsResponse, error) {
@@ -261,10 +277,32 @@ func _Reviews_Query_Handler(srv interface{}, ctx context.Context, dec func(inter
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Reviews_Ping_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(empty.Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ReviewsServer).Ping(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/Reviews/Ping",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ReviewsServer).Ping(ctx, req.(*empty.Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _Reviews_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "Reviews",
 	HandlerType: (*ReviewsServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "Ping",
+			Handler:    _Reviews_Ping_Handler,
+		},
 		{
 			MethodName: "Query",
 			Handler:    _Reviews_Query_Handler,

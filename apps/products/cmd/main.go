@@ -6,12 +6,15 @@ import (
 	"os/signal"
 	"syscall"
 	"time"
-	"github.com/newer027/kratos_microservice/apps/products/internal/di"
+
+	"github.com/go-kratos/kratos/pkg/conf/paladin"
+	"github.com/go-kratos/kratos/pkg/log"
 	"github.com/go-kratos/kratos/pkg/naming/discovery"
 	"github.com/go-kratos/kratos/pkg/net/rpc/warden/resolver"
-	"github.com/go-kratos/kratos/pkg/conf/paladin"
+	xtime "github.com/go-kratos/kratos/pkg/time"
+
 	"github.com/go-kratos/kratos/pkg/net/trace/zipkin"
-	"github.com/go-kratos/kratos/pkg/log"
+	"github.com/newer027/kratos_microservice/apps/products/internal/di"
 )
 
 func main() {
@@ -21,11 +24,12 @@ func main() {
 	log.Info("products servive start")
 	paladin.Init()
 
-    zipkin.Init(&zipkin.Config{
-        Endpoint: "http://127.0.0.1:9411/api/v2/spans",
+	zipkin.Init(&zipkin.Config{
+		Endpoint: "http://jaeger-collector:9411/api/v2/spans",
+		Timeout:  xtime.Duration(20000 * time.Millisecond),
 	})
 	resolver.Register(discovery.Builder())
-	
+
 	_, closeFunc, err := di.InitApp()
 	if err != nil {
 		panic(err)

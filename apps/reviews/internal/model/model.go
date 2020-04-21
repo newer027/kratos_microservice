@@ -1,12 +1,10 @@
 package model
 
-// Kratos hello kratos.
-type Kratos struct {
-	Hello string
-}
+import "time"
 
-type Article struct {
-	ID int64
-	Content string
-	Author string
+type Review struct {
+	ID          int64    	`json:"id"`
+	ProductID   int64    	`json:"product_id"`
+	Message     string    	`json:"message"`
+	CreatedTime time.Time 	`json:"created_time"`
 }

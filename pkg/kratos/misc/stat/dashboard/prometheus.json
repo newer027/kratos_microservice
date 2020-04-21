@@ -28,7 +28,7 @@
         "rgba(40, 237, 51, 0.89)",
         "rgba(242, 18, 18, 0.97)"
       ],
-      "datasource": "$datasource",
+      "datasource": "Prometheus",
       "decimals": 1,
       "format": "s",
       "gauge": {
@@ -83,7 +83,7 @@
       "targets": [
         {
           "dsType": "influxdb",
-          "expr": "min(time() - process_start_time_seconds{instance=~\"$instance\"})",
+          "expr": "min(time() - process_start_time_seconds{job=\"details\"})",
           "format": "time_series",
           "groupBy": [
             {
@@ -144,7 +144,7 @@
         "rgba(237, 129, 40, 0.89)",
         "rgba(245, 54, 54, 0.9)"
       ],
-      "datasource": "$datasource",
+      "datasource": "Prometheus",
       "format": "none",
       "gauge": {
         "maxValue": 100,
@@ -197,7 +197,7 @@
       "targets": [
         {
           "dsType": "influxdb",
-          "expr": "max(process_open_fds{instance=~\"$instance\"})",
+          "expr": "max(process_open_fds{job=\"details\"})",
           "format": "time_series",
           "groupBy": [
             {
@@ -257,7 +257,7 @@
         "rgba(237, 129, 40, 0.89)",
         "rgba(245, 54, 54, 0.9)"
       ],
-      "datasource": "$datasource",
+      "datasource": "Prometheus",
       "decimals": 2,
       "format": "decbytes",
       "gauge": {
@@ -311,7 +311,7 @@
       "targets": [
         {
           "dsType": "influxdb",
-          "expr": "max(process_virtual_memory_bytes{instance=~\"$instance\"})",
+          "expr": "max(process_virtual_memory_bytes{job=\"details\"})",
           "format": "time_series",
           "groupBy": [
             {
@@ -371,7 +371,7 @@
         "rgba(237, 129, 40, 0.89)",
         "rgba(245, 54, 54, 0.9)"
       ],
-      "datasource": "$datasource",
+      "datasource": "Prometheus",
       "decimals": 2,
       "format": "decbytes",
       "gauge": {
@@ -425,7 +425,7 @@
       "targets": [
         {
           "dsType": "influxdb",
-          "expr": "max(process_resident_memory_bytes{instance=~\"$instance\"})",
+          "expr": "max(process_resident_memory_bytes{job=\"details\"})",
           "format": "time_series",
           "groupBy": [
             {
@@ -485,7 +485,7 @@
         "rgba(237, 129, 40, 0.89)",
         "#d44a3a"
       ],
-      "datasource": "$datasource",
+      "datasource": "Prometheus",
       "format": "percentunit",
       "gauge": {
         "maxValue": 100,
@@ -538,7 +538,7 @@
       "targets": [
         {
           "dsType": "influxdb",
-          "expr": "avg(irate(process_cpu_seconds_total{instance=~\"$instance\"}[5m]))",
+          "expr": "avg(irate(process_cpu_seconds_total{job=\"details\"}[5m]))",
           "format": "time_series",
           "groupBy": [
             {
@@ -602,7 +602,7 @@
         "rgba(237, 129, 40, 0.89)",
         "#d44a3a"
       ],
-      "datasource": "$datasource",
+      "datasource": "Prometheus",
       "format": "short",
       "gauge": {
         "maxValue": 100,
@@ -655,7 +655,7 @@
       "targets": [
         {
           "dsType": "influxdb",
-          "expr": "avg(max(go_memstats_alloc_bytes{instance=~\"$instance\"}) by (instance))",
+          "expr": "avg(max(go_memstats_alloc_bytes{job=\"details\"}) by (instance))",
           "format": "time_series",
           "groupBy": [
             {
@@ -715,7 +715,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$datasource",
+      "datasource": "Prometheus",
       "decimals": null,
       "description": "网络的每秒包数量",
       "editable": true,
@@ -765,7 +765,7 @@
           "calculatedInterval": "2s",
           "datasourceErrors": {},
           "errors": {},
-          "expr": "irate(node_network_receive_packets_total{instance=\"$instance\", device!~\"^(lo|bond).*\"}[5m]) or irate(node_network_receive_packets{instance=\"$instance\", device!~\"^(lo|bond).*\"}[5m]) ",
+          "expr": "irate(node_network_receive_packets_total{job=\"details\", device!~\"^(lo|bond).*\"}[5m]) or irate(node_network_receive_packets{job=\"details\", device!~\"^(lo|bond).*\"}[5m]) ",
           "format": "time_series",
           "hide": false,
           "interval": "1m",
@@ -780,7 +780,7 @@
           "calculatedInterval": "2s",
           "datasourceErrors": {},
           "errors": {},
-          "expr": "irate(node_network_transmit_packets_total{instance_name=\"$instance\", device!~\"^(lo|bond).*\"}[5m]) or irate(node_network_transmit_packets{instance_name=\"$instance\", device!~\"^(lo|bond).*\"}[5m]) ",
+          "expr": "irate(node_network_transmit_packets_total{instance_name=\"details\", device!~\"^(lo|bond).*\"}[5m]) or irate(node_network_transmit_packets{instance_name=\"details\", device!~\"^(lo|bond).*\"}[5m]) ",
           "format": "time_series",
           "hide": false,
           "interval": "1m",
@@ -838,7 +838,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$datasource",
+      "datasource": "Prometheus",
       "decimals": null,
       "description": "系统网络流量速率",
       "editable": true,
@@ -888,7 +888,7 @@
           "calculatedInterval": "2s",
           "datasourceErrors": {},
           "errors": {},
-          "expr": "irate(node_network_receive_bytes{instance=\"$instance\", device!~\"^(lo|bond).*\"}[5m]) * 8 or irate(node_network_receive_bytes_total{instance=\"$instance\", device!~\"^(lo|bond).*\"}[5m]) * 8",
+          "expr": "irate(node_network_receive_bytes{job=\"details\", device!~\"^(lo|bond).*\"}[5m]) * 8 or irate(node_network_receive_bytes_total{job=\"details\", device!~\"^(lo|bond).*\"}[5m]) * 8",
           "format": "time_series",
           "interval": "$interval",
           "intervalFactor": 1,
@@ -902,7 +902,7 @@
           "calculatedInterval": "2s",
           "datasourceErrors": {},
           "errors": {},
-          "expr": "irate(node_network_transmit_bytes{instance=\"$instance\", device!~\"^(lo|bond).*\"}[5m]) * 8 or irate(node_network_transmit_bytes_total{instance=\"$instance\", device!~\"^(lo|bond).*\"}[5m]) * 8",
+          "expr": "irate(node_network_transmit_bytes{job=\"details\", device!~\"^(lo|bond).*\"}[5m]) * 8 or irate(node_network_transmit_bytes_total{job=\"details\", device!~\"^(lo|bond).*\"}[5m]) * 8",
           "format": "time_series",
           "interval": "$interval",
           "intervalFactor": 1,
@@ -969,7 +969,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "$datasource",
+          "datasource": "Prometheus",
           "fill": 1,
           "gridPos": {
             "h": 5,
@@ -1005,7 +1005,7 @@
           "targets": [
             {
               "dsType": "influxdb",
-              "expr": "avg(go_goroutines{instance=~\"$instance\"}) by (instance)",
+              "expr": "avg(go_goroutines{job=\"details\"}) by (instance)",
               "format": "time_series",
               "groupBy": [
                 {
@@ -1091,7 +1091,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "$datasource",
+          "datasource": "Prometheus",
           "fill": 1,
           "gridPos": {
             "h": 5,
@@ -1127,7 +1127,7 @@
           "targets": [
             {
               "dsType": "influxdb",
-              "expr": "avg(go_memstats_heap_objects{instance=~\"$instance\"}) by (instance)",
+              "expr": "avg(go_memstats_heap_objects{job=\"details\"}) by (instance)",
               "format": "time_series",
               "groupBy": [
                 {
@@ -1214,7 +1214,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "$datasource",
+          "datasource": "Prometheus",
           "fill": 1,
           "gridPos": {
             "h": 5,
@@ -1249,7 +1249,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "go_gc_duration_seconds{quantile=\"1\", instance=~\"$instance\" }",
+              "expr": "go_gc_duration_seconds{quantile=\"1\", job=\"details\" }",
               "format": "time_series",
               "intervalFactor": 1,
               "legendFormat": "{{instance}} ",
@@ -1316,7 +1316,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "$datasource",
+          "datasource": "Prometheus",
           "fill": 1,
           "gridPos": {
             "h": 8,
@@ -1352,7 +1352,7 @@
           "targets": [
             {
               "dsType": "influxdb",
-              "expr": "sum(rate(http_server_requests_duration_ms_count{instance=~\"$instance\",path!~\"register|.*ping\"}[2m])) by (path)",
+              "expr": "sum(rate(http_server_requests_duration_ms_count{job=\"details\",path!~\"register|.*ping\"}[2m])) by (path)",
               "format": "time_series",
               "groupBy": [
                 {
@@ -1439,7 +1439,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "$datasource",
+          "datasource": "Prometheus",
           "fill": 1,
           "gridPos": {
             "h": 8,
@@ -1475,7 +1475,7 @@
           "targets": [
             {
               "dsType": "influxdb",
-              "expr": "avg(increase(http_server_requests_duration_ms_sum{instance=~\"$instance\",path!~\"register|.*ping\"}[5m])/ increase(http_server_requests_duration_ms_count{instance=~\"$instance\",path!~\"register|.*ping\"}[5m]) >0) by (path)",
+              "expr": "avg(increase(http_server_requests_duration_ms_sum{job=\"details\",path!~\"register|.*ping\"}[5m])/ increase(http_server_requests_duration_ms_count{job=\"details\",path!~\"register|.*ping\"}[5m]) >0) by (path)",
               "format": "time_series",
               "groupBy": [
                 {
@@ -1563,7 +1563,7 @@
             "label": "Others",
             "threshold": 0
           },
-          "datasource": "$datasource",
+          "datasource": "Prometheus",
           "fontSize": "80%",
           "format": "short",
           "gridPos": {
@@ -1587,7 +1587,7 @@
           "strokeWidth": 1,
           "targets": [
             {
-              "expr": "sum(irate(http_server_requests_duration_ms_count{instance=~\"$instance\",caller=~\"$http_user\",path=~\"$http_method\",path!~\"register|.*ping\"}[5m])) by (caller,path)",
+              "expr": "sum(irate(http_server_requests_duration_ms_count{job=\"details\",caller=~\"$http_user\",path=~\"$http_method\",path!~\"register|.*ping\"}[5m])) by (caller,path)",
               "format": "time_series",
               "groupBy": [
                 {
@@ -1635,7 +1635,7 @@
           "bars": true,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "$datasource",
+          "datasource": "Prometheus",
           "fill": 1,
           "gridPos": {
             "h": 9,
@@ -1711,14 +1711,14 @@
               "tags": []
             },
             {
-              "expr": "sum(irate(http_server_requests_code_total{instance=~\"$instance\",code!~\"0\",path=~\"$http_method\",caller=~\"$http_user\",path!~\"register|.*ping\"}[5m])) BY (path, code)",
+              "expr": "sum(irate(http_server_requests_code_total{job=\"details\",code!~\"0\",path=~\"$http_method\",caller=~\"$http_user\",path!~\"register|.*ping\"}[5m])) BY (path, code)",
               "format": "time_series",
               "hide": true,
               "intervalFactor": 1,
               "refId": "B"
             },
             {
-              "expr": "sum(irate(http_server_requests_code_total{instance=~\"$instance\",path=~\"$http_method\",caller=~\"$http_user\",path!~\"register|.*ping\"}[5m])) BY ( path)",
+              "expr": "sum(irate(http_server_requests_code_total{job=\"details\",path=~\"$http_method\",caller=~\"$http_user\",path!~\"register|.*ping\"}[5m])) BY ( path)",
               "format": "time_series",
               "hide": true,
               "intervalFactor": 1,
@@ -1771,7 +1771,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "$datasource",
+          "datasource": "Prometheus",
           "fill": 1,
           "gridPos": {
             "h": 9,
@@ -1807,7 +1807,7 @@
           "targets": [
             {
               "dsType": "influxdb",
-              "expr": "sum(rate(http_server_requests_code_total{instance=~\"$instance\", code!=\"0\",path!~\"register|.*ping\"}[5m])) by (path, code)",
+              "expr": "sum(rate(http_server_requests_code_total{job=\"details\", code!=\"0\",path!~\"register|.*ping\"}[5m])) by (path, code)",
               "format": "time_series",
               "groupBy": [
                 {
@@ -1894,7 +1894,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "$datasource",
+          "datasource": "Prometheus",
           "fill": 1,
           "gridPos": {
             "h": 8,
@@ -1929,7 +1929,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "histogram_quantile(0.99, sum(irate(http_server_requests_duration_ms_bucket{instance=~\"$instance\",path=~\"$http_method\",caller=~\"$http_user\",path!~\"register|.*ping\"}[5m])) by (path,le))",
+              "expr": "histogram_quantile(0.99, sum(irate(http_server_requests_duration_ms_bucket{job=\"details\",path=~\"$http_method\",caller=~\"$http_user\",path!~\"register|.*ping\"}[5m])) by (path,le))",
               "format": "time_series",
               "hide": false,
               "intervalFactor": 1,
@@ -1983,7 +1983,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "$datasource",
+          "datasource": "Prometheus",
           "fill": 1,
           "gridPos": {
             "h": 8,
@@ -2018,7 +2018,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "histogram_quantile(0.90, sum(irate(http_server_requests_duration_ms_bucket{instance=~\"$instance\",path=~\"$http_method\",caller=~\"$http_user\",path!~\"register|.*ping\"}[5m])) by (path,le))",
+              "expr": "histogram_quantile(0.90, sum(irate(http_server_requests_duration_ms_bucket{job=\"details\",path=~\"$http_method\",caller=~\"$http_user\",path!~\"register|.*ping\"}[5m])) by (path,le))",
               "format": "time_series",
               "intervalFactor": 1,
               "legendFormat": "pt90: {{path}}",
@@ -2085,7 +2085,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "$datasource",
+          "datasource": "Prometheus",
           "fill": 1,
           "gridPos": {
             "h": 7,
@@ -2121,7 +2121,7 @@
           "targets": [
             {
               "dsType": "influxdb",
-              "expr": "sum(rate(grpc_server_requests_duration_ms_count{instance=~\"$instance\",method!~\".*Ping\"}[2m])) by (method)",
+              "expr": "sum(rate(grpc_server_requests_duration_ms_count{job=\"details\",method!~\".*Ping\"}[2m])) by (method)",
               "format": "time_series",
               "groupBy": [
                 {
@@ -2206,7 +2206,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "$datasource",
+          "datasource": "Prometheus",
           "fill": 1,
           "gridPos": {
             "h": 7,
@@ -2242,7 +2242,7 @@
           "targets": [
             {
               "dsType": "influxdb",
-              "expr": "avg(increase(grpc_server_requests_duration_ms_sum{instance=~\"$instance\",method!~\".*Ping\"}[5m])/ increase(grpc_server_requests_duration_ms_count{instance=~\"$instance\"}[5m])>0 ) by (method)",
+              "expr": "avg(increase(grpc_server_requests_duration_ms_sum{job=\"details\",method!~\".*Ping\"}[5m])/ increase(grpc_server_requests_duration_ms_count{job=\"details\"}[5m])>0 ) by (method)",
               "format": "time_series",
               "groupBy": [
                 {
@@ -2330,7 +2330,7 @@
             "label": "Others",
             "threshold": 0
           },
-          "datasource": "$datasource",
+          "datasource": "Prometheus",
           "fontSize": "80%",
           "format": "short",
           "gridPos": {
@@ -2354,7 +2354,7 @@
           "strokeWidth": 1,
           "targets": [
             {
-              "expr": "sum(irate(grpc_server_requests_duration_ms_count{instance=~\"$instance\",caller=~\"$grpc_caller\",method!~\".*Ping\"}[5m])) by (caller,method)",
+              "expr": "sum(irate(grpc_server_requests_duration_ms_count{job=\"details\",caller=~\"$grpc_caller\",method!~\".*Ping\"}[5m])) by (caller,method)",
               "format": "time_series",
               "groupBy": [
                 {
@@ -2402,7 +2402,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "$datasource",
+          "datasource": "Prometheus",
           "fill": 1,
           "gridPos": {
             "h": 9,
@@ -2437,7 +2437,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(rate(grpc_server_requests_code_total{instance=~\"$instance\", code!=\"0\",method!~\".*Ping\"}[5m])) by (method, code)",
+              "expr": "sum(rate(grpc_server_requests_code_total{job=\"details\", code!=\"0\",method!~\".*Ping\"}[5m])) by (method, code)",
               "format": "time_series",
               "intervalFactor": 1,
               "legendFormat": "{{method}} {{code}}",
@@ -2490,7 +2490,7 @@
           "bars": true,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "$datasource",
+          "datasource": "Prometheus",
           "fill": 1,
           "gridPos": {
             "h": 9,
@@ -2526,7 +2526,7 @@
           "targets": [
             {
               "dsType": "influxdb",
-              "expr": "sum(irate(grpc_server_requests_code_total{instance=~\"$instance\",code!~\"0\",caller=~\"$grpc_caller\",method!~\".*Ping\"}[5m])) BY ( method, code) / IGNORING(code) GROUP_LEFT() sum(irate(grpc_server_requests_code_total{instance=~\"$instance\",caller=~\"$grpc_caller\",method!~\".*Ping\"}[5m])) BY ( method) * 100",
+              "expr": "sum(irate(grpc_server_requests_code_total{job=\"details\",code!~\"0\",caller=~\"$grpc_caller\",method!~\".*Ping\"}[5m])) BY ( method, code) / IGNORING(code) GROUP_LEFT() sum(irate(grpc_server_requests_code_total{job=\"details\",caller=~\"$grpc_caller\",method!~\".*Ping\"}[5m])) BY ( method) * 100",
               "format": "time_series",
               "groupBy": [
                 {
@@ -2611,7 +2611,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "$datasource",
+          "datasource": "Prometheus",
           "fill": 1,
           "gridPos": {
             "h": 9,
@@ -2646,7 +2646,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "histogram_quantile(0.99, sum(irate(grpc_server_requests_duration_ms_bucket{instance=~\"$instance\",method!~\".*Ping\",caller=~\"$grpc_caller\"}[5m])) by (le, method))",
+              "expr": "histogram_quantile(0.99, sum(irate(grpc_server_requests_duration_ms_bucket{job=\"details\",method!~\".*Ping\",caller=~\"$grpc_caller\"}[5m])) by (le, method))",
               "format": "time_series",
               "intervalFactor": 1,
               "legendFormat": "grpc: pt99: {{method}}",
@@ -2699,7 +2699,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "$datasource",
+          "datasource": "Prometheus",
           "fill": 1,
           "gridPos": {
             "h": 9,
@@ -2734,7 +2734,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "histogram_quantile(0.90, sum(irate(grpc_server_requests_duration_ms_bucket{instance=~\"$instance\",method!~\".*Ping\",caller=~\"$grpc_caller\"}[5m])) by (le, method))",
+              "expr": "histogram_quantile(0.90, sum(irate(grpc_server_requests_duration_ms_bucket{job=\"details\",method!~\".*Ping\",caller=~\"$grpc_caller\"}[5m])) by (le, method))",
               "format": "time_series",
               "intervalFactor": 1,
               "legendFormat": "grpc: pt90: {{method}}",
@@ -2801,7 +2801,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "$datasource",
+          "datasource": "Prometheus",
           "fill": 1,
           "gridPos": {
             "h": 7,
@@ -2837,7 +2837,7 @@
           "targets": [
             {
               "dsType": "influxdb",
-              "expr": "sum(rate(grpc_client_requests_duration_ms_count{instance=~\"$instance\",method!~\".*Ping\"}[5m])) by (method)",
+              "expr": "sum(rate(grpc_client_requests_duration_ms_count{job=\"details\",method!~\".*Ping\"}[5m])) by (method)",
               "format": "time_series",
               "groupBy": [
                 {
@@ -2923,7 +2923,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "$datasource",
+          "datasource": "Prometheus",
           "fill": 1,
           "gridPos": {
             "h": 7,
@@ -2959,7 +2959,7 @@
           "targets": [
             {
               "dsType": "influxdb",
-              "expr": "avg(increase(grpc_client_requests_duration_ms_sum{instance=~\"$instance\",method!~\".*Ping\"}[5m])/ increase(grpc_client_requests_duration_ms_count{instance=~\"$instance\",method!~\".*Ping\"}[5m]) > 0 ) by (method)",
+              "expr": "avg(increase(grpc_client_requests_duration_ms_sum{job=\"details\",method!~\".*Ping\"}[5m])/ increase(grpc_client_requests_duration_ms_count{job=\"details\",method!~\".*Ping\"}[5m]) > 0 ) by (method)",
               "format": "time_series",
               "groupBy": [
                 {
@@ -3045,7 +3045,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "$datasource",
+          "datasource": "Prometheus",
           "fill": 1,
           "gridPos": {
             "h": 7,
@@ -3081,7 +3081,7 @@
           "targets": [
             {
               "dsType": "influxdb",
-              "expr": "sum(irate(grpc_client_requests_code_total{instance=~\"$instance\",method!~\".*Ping\",code!=\"0\"}[5m])) by (method,code)",
+              "expr": "sum(irate(grpc_client_requests_code_total{job=\"details\",method!~\".*Ping\",code!=\"0\"}[5m])) by (method,code)",
               "format": "time_series",
               "groupBy": [
                 {
@@ -3167,7 +3167,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "$datasource",
+          "datasource": "Prometheus",
           "fill": 1,
           "gridPos": {
             "h": 7,
@@ -3203,7 +3203,7 @@
           "targets": [
             {
               "dsType": "influxdb",
-              "expr": "sum(rate(http_client_requests_duration_ms_count{instance=~\"$instance\",path!~\".*/discovery/.*\"}[5m])) by (path)",
+              "expr": "sum(rate(http_client_requests_duration_ms_count{job=\"details\",path!~\".*/discovery/.*\"}[5m])) by (path)",
               "format": "time_series",
               "groupBy": [
                 {
@@ -3288,7 +3288,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "$datasource",
+          "datasource": "Prometheus",
           "fill": 1,
           "gridPos": {
             "h": 7,
@@ -3324,7 +3324,7 @@
           "targets": [
             {
               "dsType": "influxdb",
-              "expr": "avg(increase(http_client_requests_duration_ms_sum{instance=~\"$instance\",path!~\".*/discovery/.*\"}[5m])/ increase(http_client_requests_duration_ms_count{instance=~\"$instance\",path!~\".*/discovery/.*\"}[5m]) > 0 ) by (path)",
+              "expr": "avg(increase(http_client_requests_duration_ms_sum{job=\"details\",path!~\".*/discovery/.*\"}[5m])/ increase(http_client_requests_duration_ms_count{job=\"details\",path!~\".*/discovery/.*\"}[5m]) > 0 ) by (path)",
               "format": "time_series",
               "groupBy": [
                 {
@@ -3410,7 +3410,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "$datasource",
+          "datasource": "Prometheus",
           "fill": 1,
           "gridPos": {
             "h": 7,
@@ -3446,7 +3446,7 @@
           "targets": [
             {
               "dsType": "influxdb",
-              "expr": "sum(irate(http_client_requests_code_total{instance=~\"$instance\",path!~\".*/discovery/.*\",code!=\"0\"}[5m])) by (path,code)",
+              "expr": "sum(irate(http_client_requests_code_total{job=\"details\",path!~\".*/discovery/.*\",code!=\"0\"}[5m])) by (path,code)",
               "format": "time_series",
               "groupBy": [
                 {
@@ -3532,7 +3532,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "$datasource",
+          "datasource": "Prometheus",
           "fill": 1,
           "gridPos": {
             "h": 7,
@@ -3568,7 +3568,7 @@
           "targets": [
             {
               "dsType": "influxdb",
-              "expr": "sum(rate(mysql_client_requests_duration_ms_count{instance=~\"$instance\"}[5m])) by (command)",
+              "expr": "sum(rate(mysql_client_requests_duration_ms_count{job=\"details\"}[5m])) by (command)",
               "format": "time_series",
               "groupBy": [
                 {
@@ -3656,7 +3656,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "$datasource",
+          "datasource": "Prometheus",
           "fill": 1,
           "gridPos": {
             "h": 7,
@@ -3692,7 +3692,7 @@
           "targets": [
             {
               "dsType": "influxdb",
-              "expr": "avg(increase(mysql_client_requests_duration_ms_sum{instance=~\"$instance\"}[5m])/ increase(mysql_client_requests_duration_ms_count{instance=~\"$instance\"}[5m]) > 0 ) by (command)",
+              "expr": "avg(increase(mysql_client_requests_duration_ms_sum{job=\"details\"}[5m])/ increase(mysql_client_requests_duration_ms_count{job=\"details\"}[5m]) > 0 ) by (command)",
               "format": "time_series",
               "groupBy": [
                 {
@@ -3778,7 +3778,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "$datasource",
+          "datasource": "Prometheus",
           "fill": 1,
           "gridPos": {
             "h": 7,
@@ -3814,7 +3814,7 @@
           "targets": [
             {
               "dsType": "influxdb",
-              "expr": "sum(irate(mysql_client_requests_error_total{instance=~\"$instance\"}[5m])) by (error)",
+              "expr": "sum(irate(mysql_client_requests_error_total{job=\"details\"}[5m])) by (error)",
               "format": "time_series",
               "groupBy": [
                 {
@@ -3900,7 +3900,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "$datasource",
+          "datasource": "Prometheus",
           "fill": 1,
           "gridPos": {
             "h": 7,
@@ -3936,7 +3936,7 @@
           "targets": [
             {
               "dsType": "influxdb",
-              "expr": "sum(rate(redis_client_requests_duration_ms_count{instance=~\"$instance\"}[5m])) by (command)",
+              "expr": "sum(rate(redis_client_requests_duration_ms_count{job=\"details\"}[5m])) by (command)",
               "format": "time_series",
               "groupBy": [
                 {
@@ -4021,7 +4021,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "$datasource",
+          "datasource": "Prometheus",
           "fill": 1,
           "gridPos": {
             "h": 7,
@@ -4057,7 +4057,7 @@
           "targets": [
             {
               "dsType": "influxdb",
-              "expr": "avg(increase(redis_client_requests_duration_ms_sum{instance=~\"$instance\"}[5m])/ increase(redis_client_requests_duration_ms_count{instance=~\"$instance\"}[5m]) > 0 ) by (command)",
+              "expr": "avg(increase(redis_client_requests_duration_ms_sum{job=\"details\"}[5m])/ increase(redis_client_requests_duration_ms_count{job=\"details\"}[5m]) > 0 ) by (command)",
               "format": "time_series",
               "groupBy": [
                 {
@@ -4143,7 +4143,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "$datasource",
+          "datasource": "Prometheus",
           "fill": 1,
           "gridPos": {
             "h": 7,
@@ -4179,7 +4179,7 @@
           "targets": [
             {
               "dsType": "influxdb",
-              "expr": "sum(irate(redis_client_requests_error_total{instance=~\"$instance\"}[5m])) by (error)",
+              "expr": "sum(irate(redis_client_requests_error_total{job=\"details\"}[5m])) by (error)",
               "format": "time_series",
               "groupBy": [
                 {
@@ -4265,7 +4265,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "$datasource",
+          "datasource": "Prometheus",
           "fill": 1,
           "gridPos": {
             "h": 7,
@@ -4301,7 +4301,7 @@
           "targets": [
             {
               "dsType": "influxdb",
-              "expr": "sum(rate(memcache_client_requests_duration_ms_count{instance=~\"$instance\"}[5m])) by (command)",
+              "expr": "sum(rate(memcache_client_requests_duration_ms_count{job=\"details\"}[5m])) by (command)",
               "format": "time_series",
               "groupBy": [
                 {
@@ -4386,7 +4386,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "$datasource",
+          "datasource": "Prometheus",
           "fill": 1,
           "gridPos": {
             "h": 7,
@@ -4422,7 +4422,7 @@
           "targets": [
             {
               "dsType": "influxdb",
-              "expr": "avg(increase(memcache_client_requests_duration_ms_sum{instance=~\"$instance\"}[5m])/ increase(memcache_client_requests_duration_ms_count{instance=~\"$instance\"}[5m]) >0) by (command)",
+              "expr": "avg(increase(memcache_client_requests_duration_ms_sum{job=\"details\"}[5m])/ increase(memcache_client_requests_duration_ms_count{job=\"details\"}[5m]) >0) by (command)",
               "format": "time_series",
               "groupBy": [
                 {
@@ -4508,7 +4508,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "$datasource",
+          "datasource": "Prometheus",
           "fill": 1,
           "gridPos": {
             "h": 7,
@@ -4544,7 +4544,7 @@
           "targets": [
             {
               "dsType": "influxdb",
-              "expr": "sum(irate(memcache_client_requests_error_total{instance=~\"$instance\"}[5m])) by (error)",
+              "expr": "sum(irate(memcache_client_requests_error_total{job=\"details\"}[5m])) by (error)",
               "format": "time_series",
               "groupBy": [
                 {
@@ -4630,7 +4630,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "$datasource",
+          "datasource": "Prometheus",
           "fill": 1,
           "gridPos": {
             "h": 7,
@@ -4666,7 +4666,7 @@
           "targets": [
             {
               "dsType": "influxdb",
-              "expr": "sum(rate(tidb_client_requests_duration_ms_count{instance=~\"$instance\"}[5m])) by (command)",
+              "expr": "sum(rate(tidb_client_requests_duration_ms_count{job=\"details\"}[5m])) by (command)",
               "format": "time_series",
               "groupBy": [
                 {
@@ -4751,7 +4751,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "$datasource",
+          "datasource": "Prometheus",
           "fill": 1,
           "gridPos": {
             "h": 7,
@@ -4787,7 +4787,7 @@
           "targets": [
             {
               "dsType": "influxdb",
-              "expr": "avg(increase(tidb_client_requests_duration_ms_sum{instance=~\"$instance\"}[5m])/ increase(tidb_client_requests_duration_ms_count{instance=~\"$instance\"}[5m]) > 0 ) by (command)",
+              "expr": "avg(increase(tidb_client_requests_duration_ms_sum{job=\"details\"}[5m])/ increase(tidb_client_requests_duration_ms_count{job=\"details\"}[5m]) > 0 ) by (command)",
               "format": "time_series",
               "groupBy": [
                 {
@@ -4873,7 +4873,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "$datasource",
+          "datasource": "Prometheus",
           "fill": 1,
           "gridPos": {
             "h": 7,
@@ -4909,7 +4909,7 @@
           "targets": [
             {
               "dsType": "influxdb",
-              "expr": "sum(irate(tidb_client_requests_error_total{instance=~\"$instance\"}[5m])) by (error)",
+              "expr": "sum(irate(tidb_client_requests_error_total{job=\"details\"}[5m])) by (error)",
               "format": "time_series",
               "groupBy": [
                 {
@@ -4995,7 +4995,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "$datasource",
+          "datasource": "Prometheus",
           "fill": 1,
           "gridPos": {
             "h": 7,
@@ -5031,7 +5031,7 @@
           "targets": [
             {
               "dsType": "influxdb",
-              "expr": "sum(rate(hbase_client_requests_duration_ms_count{instance=~\"$instance\"}[5m])) by (command)",
+              "expr": "sum(rate(hbase_client_requests_duration_ms_count{job=\"details\"}[5m])) by (command)",
               "format": "time_series",
               "groupBy": [
                 {
@@ -5116,7 +5116,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "$datasource",
+          "datasource": "Prometheus",
           "fill": 1,
           "gridPos": {
             "h": 7,
@@ -5152,7 +5152,7 @@
           "targets": [
             {
               "dsType": "influxdb",
-              "expr": "avg(increase(hbase_client_requests_duration_ms_sum{instance=~\"$instance\"}[5m])/ increase(hbase_client_requests_duration_ms_count{instance=~\"$instance\"}[5m]) > 0 ) by (command)",
+              "expr": "avg(increase(hbase_client_requests_duration_ms_sum{job=\"details\"}[5m])/ increase(hbase_client_requests_duration_ms_count{job=\"details\"}[5m]) > 0 ) by (command)",
               "format": "time_series",
               "groupBy": [
                 {
@@ -5238,7 +5238,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "$datasource",
+          "datasource": "Prometheus",
           "fill": 1,
           "gridPos": {
             "h": 7,
@@ -5274,7 +5274,7 @@
           "targets": [
             {
               "dsType": "influxdb",
-              "expr": "sum(irate(hbase_client_requests_error_total{instance=~\"$instance\"}[5m])) by (error)",
+              "expr": "sum(irate(hbase_client_requests_error_total{job=\"details\"}[5m])) by (error)",
               "format": "time_series",
               "groupBy": [
                 {
@@ -5360,7 +5360,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "$datasource",
+          "datasource": "Prometheus",
           "fill": 1,
           "gridPos": {
             "h": 7,
@@ -5396,7 +5396,7 @@
           "targets": [
             {
               "dsType": "influxdb",
-              "expr": "sum(rate(databus_client_requests_duration_ms_count{instance=~\"$instance\"}[5m])) by (command)",
+              "expr": "sum(rate(databus_client_requests_duration_ms_count{job=\"details\"}[5m])) by (command)",
               "format": "time_series",
               "groupBy": [
                 {
@@ -5481,7 +5481,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "$datasource",
+          "datasource": "Prometheus",
           "fill": 1,
           "gridPos": {
             "h": 7,
@@ -5517,7 +5517,7 @@
           "targets": [
             {
               "dsType": "influxdb",
-              "expr": "avg(increase(databus_client_requests_duration_ms_sum{instance=~\"$instance\"}[5m])/ increase(databus_client_requests_duration_ms_count{instance=~\"$instance\"}[5m]) > 0 ) by (command)",
+              "expr": "avg(increase(databus_client_requests_duration_ms_sum{job=\"details\"}[5m])/ increase(databus_client_requests_duration_ms_count{job=\"details\"}[5m]) > 0 ) by (command)",
               "format": "time_series",
               "groupBy": [
                 {
@@ -5603,7 +5603,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "$datasource",
+          "datasource": "Prometheus",
           "fill": 1,
           "gridPos": {
             "h": 7,
@@ -5639,7 +5639,7 @@
           "targets": [
             {
               "dsType": "influxdb",
-              "expr": "sum(irate(databus_client_requests_error_total{instance=~\"$instance\"}[5m])) by (error)",
+              "expr": "sum(irate(databus_client_requests_error_total{job=\"details\"}[5m])) by (error)",
               "format": "time_series",
               "groupBy": [
                 {
@@ -5760,7 +5760,7 @@
             "$__all"
           ]
         },
-        "datasource": "$datasource",
+        "datasource": "Prometheus",
         "definition": "label_values(go_goroutines,instance)",
         "hide": 0,
         "includeAll": true,
@@ -5787,15 +5787,15 @@
             "$__all"
           ]
         },
-        "datasource": "$datasource",
-        "definition": "label_values(http_server_requests_duration_ms_count{path!=\"\",instance=~\"$instance\"}, path)",
+        "datasource": "Prometheus",
+        "definition": "label_values(http_server_requests_duration_ms_count{path!=\"\",job=\"details\"}, path)",
         "hide": 0,
         "includeAll": true,
         "label": "http接口",
         "multi": true,
         "name": "http_method",
         "options": [],
-        "query": "label_values(http_server_requests_duration_ms_count{path!=\"\",instance=~\"$instance\"}, path)",
+        "query": "label_values(http_server_requests_duration_ms_count{path!=\"\",job=\"details\"}, path)",
         "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
@@ -5814,15 +5814,15 @@
             "$__all"
           ]
         },
-        "datasource": "$datasource",
-        "definition": "label_values(http_server_requests_duration_ms_count{caller!=\"\",instance=~\"$instance\"}, caller)",
+        "datasource": "Prometheus",
+        "definition": "label_values(http_server_requests_duration_ms_count{caller!=\"\",job=\"details\"}, caller)",
         "hide": 0,
         "includeAll": true,
         "label": "http调用者",
         "multi": true,
         "name": "http_user",
         "options": [],
-        "query": "label_values(http_server_requests_duration_ms_count{caller!=\"\",instance=~\"$instance\"}, caller)",
+        "query": "label_values(http_server_requests_duration_ms_count{caller!=\"\",job=\"details\"}, caller)",
         "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
@@ -5841,15 +5841,15 @@
             "$__all"
           ]
         },
-        "datasource": "$datasource",
-        "definition": "label_values(http_client_requests_duration_ms_count{path!=\"\",instance=~\"$instance\"}, path)",
+        "datasource": "Prometheus",
+        "definition": "label_values(http_client_requests_duration_ms_count{path!=\"\",job=\"details\"}, path)",
         "hide": 0,
         "includeAll": true,
         "label": "http依赖接口",
         "multi": true,
         "name": "http_client_method",
         "options": [],
-        "query": "label_values(http_client_requests_duration_ms_count{path!=\"\",instance=~\"$instance\"}, path)",
+        "query": "label_values(http_client_requests_duration_ms_count{path!=\"\",job=\"details\"}, path)",
         "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
@@ -5868,15 +5868,15 @@
             "$__all"
           ]
         },
-        "datasource": "$datasource",
-        "definition": "label_values(grpc_server_requests_duration_ms_bucket{instance=~\"$instance\"},caller)",
+        "datasource": "Prometheus",
+        "definition": "label_values(grpc_server_requests_duration_ms_bucket{job=\"details\"},caller)",
         "hide": 0,
         "includeAll": true,
         "label": "grpc依赖接口",
         "multi": true,
         "name": "grpc_caller",
         "options": [],
-        "query": "label_values(grpc_server_requests_duration_ms_bucket{instance=~\"$instance\"},caller)",
+        "query": "label_values(grpc_server_requests_duration_ms_bucket{job=\"details\"},caller)",
         "refresh": 1,
         "regex": "",
         "skipUrlSync": false,

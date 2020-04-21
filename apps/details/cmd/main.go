@@ -8,12 +8,13 @@ import (
 	"syscall"
 	"time"
 
+	"github.com/go-kratos/kratos/pkg/conf/paladin"
+	"github.com/go-kratos/kratos/pkg/log"
 	"github.com/go-kratos/kratos/pkg/naming"
 	"github.com/go-kratos/kratos/pkg/naming/discovery"
-	"github.com/newer027/kratos_microservice/apps/details/internal/di"
-	"github.com/go-kratos/kratos/pkg/conf/paladin"
 	"github.com/go-kratos/kratos/pkg/net/trace/zipkin"
-	"github.com/go-kratos/kratos/pkg/log"
+	xtime "github.com/go-kratos/kratos/pkg/time"
+	"github.com/newer027/kratos_microservice/apps/details/internal/di"
 )
 
 func main() {
@@ -27,28 +28,29 @@ func main() {
 		panic(err)
 	}
 
-    zipkin.Init(&zipkin.Config{
-        Endpoint: "http://127.0.0.1:9411/api/v2/spans",
+	zipkin.Init(&zipkin.Config{
+		Endpoint: "http://jaeger-collector:9411/api/v2/spans",
+		Timeout:  xtime.Duration(20000 * time.Millisecond),
 	})
-	
-	ip := "127.0.0.1"
+
+	ip := "details"
 	port := "9000"
 	Zone := "sh001"
 	DeployEnv := "dev"
 	AppID := "Details"
-	hn := "test"
+	hn := "newer027"
 
 	var cfg = &discovery.Config{
-		Nodes:  []string{"127.0.0.1:7171"},
-		Zone:   "sh001",
-		Env:    "dev",
+		Nodes: []string{"discovery:7171"},
+		Zone:  "sh001",
+		Env:   "dev",
 	}
 	dis := discovery.New(cfg)
 
 	ins := &naming.Instance{
-		Zone:  Zone,
-		Env:   DeployEnv,
-		AppID: AppID,
+		Zone:     Zone,
+		Env:      DeployEnv,
+		AppID:    AppID,
 		Hostname: hn,
 		Addrs: []string{
 			"grpc://" + ip + ":" + port,
@@ -58,7 +60,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	
+
 	c := make(chan os.Signal, 1)
 	signal.Notify(c, syscall.SIGHUP, syscall.SIGQUIT, syscall.SIGTERM, syscall.SIGINT)
 	for {

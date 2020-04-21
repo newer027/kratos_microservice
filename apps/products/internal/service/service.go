@@ -27,12 +27,28 @@ func New(d dao.Dao) (s *Service, cf func(), err error) {
 }
 
 // Get Get
-func (s *Service) Get(ctx context.Context, id int64) (detail *model.Detail, err error) {
+func (s *Service) Get(ctx context.Context, id int64) (product *model.Product, err error) {
+	var (
+		detail *model.Detail
+		rating *model.Rating
+		reviews []*model.Review
+	)
+	product = &model.Product{}
 	detail, err = s.dao.GetDetail(ctx, id)
 	if err != nil {
 		log.Warnv(ctx, log.KV("log", "get detail fail: err="+err.Error()))
-		return
 	}
+	product.Detail = detail
+	rating, err = s.dao.GetRating(ctx, id)
+	if err != nil {
+		log.Warnv(ctx, log.KV("log", "get rating fail: err="+err.Error()))
+	}
+	product.Rating = rating
+	reviews, err = s.dao.GetReview(ctx, id)
+	if err != nil {
+		log.Warnv(ctx, log.KV("log", "get review fail: err="+err.Error()))
+	}
+	product.Reviews = reviews
 	return
 }
 

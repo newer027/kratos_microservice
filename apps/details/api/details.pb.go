@@ -178,7 +178,7 @@ func NewDetailsClient(cc *grpc.ClientConn) DetailsClient {
 
 func (c *detailsClient) Ping(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (*empty.Empty, error) {
 	out := new(empty.Empty)
-	err := c.cc.Invoke(ctx, "/demo.service.v1.Demo/Ping", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/Details/Ping", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -244,7 +244,7 @@ func _Details_Ping_Handler(srv interface{}, ctx context.Context, dec func(interf
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/demo.service.v1.Demo/Ping",
+		FullMethod: "/Details/Ping",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(DetailsServer).Ping(ctx, req.(*empty.Empty))

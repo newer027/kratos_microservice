@@ -2,17 +2,6 @@ package model
 
 import "time"
 
-// Kratos hello kratos.
-type Kratos struct {
-	Hello string
-}
-
-type Article struct {
-	ID      int64
-	Content string
-	Author  string
-}
-
 type Product struct {
 	Detail  *Detail   `json:"detail"`
 	Rating  *Rating   `json:"rating"`

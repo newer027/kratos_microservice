@@ -5,39 +5,35 @@ import (
 	"time"
 	"github.com/pkg/errors"
 
-	"github.com/newer027/kratos_microservice/apps/products/internal/model"
-	"github.com/go-kratos/kratos/pkg/cache/memcache"
-	"github.com/go-kratos/kratos/pkg/cache/redis"
 	"github.com/go-kratos/kratos/pkg/conf/paladin"
-	"github.com/go-kratos/kratos/pkg/database/sql"
-	"github.com/go-kratos/kratos/pkg/sync/pipeline/fanout"
 	"github.com/go-kratos/kratos/pkg/net/rpc/warden"
+	"github.com/go-kratos/kratos/pkg/sync/pipeline/fanout"
 	xtime "github.com/go-kratos/kratos/pkg/time"
-	details "github.com/newer027/kratos_microservice/apps/details/api"
 	"github.com/golang/protobuf/ptypes"
-
-	"github.com/google/wire"
+	details "github.com/newer027/kratos_microservice/apps/details/api"
+	ratings "github.com/newer027/kratos_microservice/apps/ratings/api"
+	reviews "github.com/newer027/kratos_microservice/apps/reviews/api"
+	"github.com/newer027/kratos_microservice/apps/products/internal/model"
 )
 
-var Provider = wire.NewSet(New, NewDB, NewRedis, NewMC)
-
-//go:generate kratos tool genbts
 // Dao dao interface
 type Dao interface {
 	Close()
 	Ping(ctx context.Context) (err error)
-	// bts: -nullcache=&model.Article{ID:-1} -check_null_code=$!=nil&&$.ID==-1
 	GetDetail(c context.Context, id int64) (*model.Detail, error)
+	GetRating(c context.Context, id int64) (*model.Rating, error)
+	GetReview(c context.Context, id int64) ([]*model.Review, error)
 }
 
 // dao dao.
 type dao struct {
-	db          *sql.DB
-	redis       *redis.Redis
-	mc          *memcache.Memcache
-	cache *fanout.Fanout
-	demoExpire int32
-	detailsClient     details.DetailsClient
+	cache         *fanout.Fanout
+	demoExpire    int32
+	detailsClient details.DetailsClient
+	ratingsClient ratings.RatingsClient
+	reviewsClient reviews.ReviewsClient
+
+	
 }
 
 //GRPCConf .
@@ -47,13 +43,13 @@ type GRPCConf struct {
 }
 
 // New new a dao and return.
-func New(r *redis.Redis, mc *memcache.Memcache, db *sql.DB) (d Dao, cf func(), err error) {
-	return newDao(r, mc, db)
+func New() (d Dao, cf func(), err error) {
+	return newDao()
 }
 
-func newDao(r *redis.Redis, mc *memcache.Memcache, db *sql.DB) (d *dao, cf func(), err error) {
-	
-	var cfg struct{
+func newDao() (d *dao, cf func(), err error) {
+
+	var cfg struct {
 		DemoExpire xtime.Duration
 		GRPCClient map[string]*GRPCConf
 	}
@@ -61,12 +57,11 @@ func newDao(r *redis.Redis, mc *memcache.Memcache, db *sql.DB) (d *dao, cf func(
 		return
 	}
 	d = &dao{
-		db: db,
-		redis: r,
-		mc: mc,
-		cache: fanout.New("cache"),
-		demoExpire: int32(time.Duration(cfg.DemoExpire) / time.Second),
-		detailsClient:     newDetailsClient(cfg.GRPCClient["details"]),
+		cache:         fanout.New("cache"),
+		demoExpire:    int32(time.Duration(cfg.DemoExpire) / time.Second),
+		detailsClient: newDetailsClient(cfg.GRPCClient["details"]),
+		ratingsClient: newRatingsClient(cfg.GRPCClient["ratings"]),
+		reviewsClient: newReviewsClient(cfg.GRPCClient["reviews"]),
 	}
 	cf = d.Close
 	return
@@ -91,6 +86,24 @@ func newDetailsClient(cfg *GRPCConf) details.DetailsClient {
 	return details.NewDetailsClient(cc)
 }
 
+// newNoticeClient .
+func newRatingsClient(cfg *GRPCConf) ratings.RatingsClient {
+	cc, err := warden.NewClient(cfg.WardenConf).Dial(context.Background(), cfg.Addr)
+	if err != nil {
+		panic(err)
+	}
+	return ratings.NewRatingsClient(cc)
+}
+
+// newNoticeClient .
+func newReviewsClient(cfg *GRPCConf) reviews.ReviewsClient {
+	cc, err := warden.NewClient(cfg.WardenConf).Dial(context.Background(), cfg.Addr)
+	if err != nil {
+		panic(err)
+	}
+	return reviews.NewReviewsClient(cc)
+}
+
 // GetDetail GetDetail
 func (d *dao) GetDetail(ctx context.Context, id int64) (detail *model.Detail, err error) {
 	req := &details.GetDetailRequest{Id: id}
@@ -99,11 +112,82 @@ func (d *dao) GetDetail(ctx context.Context, id int64) (detail *model.Detail, er
 		return nil, errors.Wrap(err, "get detail error")
 	}
 	ct, err := ptypes.Timestamp(res.CreatedTime)
-
 	detail = &model.Detail{
 		ID:          res.Id,
+		Name:        res.Name,
 		Price:       res.Price,
 		CreatedTime: ct,
 	}
 	return
+} 
+
+// GetDetail GetDetail
+func (d *dao) GetRating(ctx context.Context, id int64) (rating *model.Rating, err error) {
+	req := &ratings.GetRatingRequest{ProductID: id}
+	res, err := d.ratingsClient.Get(ctx, req)
+	if err != nil {
+		return nil, errors.Wrap(err, "get rating error")
+	}
+	ct, err := ptypes.Timestamp(res.UpdatedTime)
+
+	rating = &model.Rating{
+		ID:          res.Id,
+		ProductID:   res.ProductID,
+		Score:       res.Score,
+		UpdatedTime: ct,
+	}
+	return
+} 
+
+// GetDetail GetDetail
+func (d *dao) GetReview(ctx context.Context, id int64) (mreviews []*model.Review, err error) {
+	req := &reviews.QueryReviewsRequest{ProductID: id}
+	res, err := d.reviewsClient.Query(ctx, req)
+	if err != nil {
+		return nil, errors.Wrap(err, "get reviews error")
+	}
+	for _, re := range res.Reviews {
+		ct, err := ptypes.Timestamp(re.CreatedTime)
+		if err != nil {
+			return nil, errors.Wrap(err, "parse timestamp error")
+		}
+		review := &model.Review{
+			ID:          re.Id,
+			ProductID:   re.ProductID,
+			Message:     re.Message,
+			CreatedTime: ct,
+		}
+		mreviews = append(mreviews, review)
+	}
+	return
+} 
+/* 
+const (
+	_queryDetail = "select id,name,price,created_time from details where id=?"
+)
+
+func NewDB() (db *sql.DB, cf func(), err error) {
+	var (
+		cfg sql.Config
+		ct  paladin.TOML
+	)
+	if err = paladin.Get("db.toml").Unmarshal(&ct); err != nil {
+		return
+	}
+	if err = ct.Get("Client").UnmarshalTOML(&cfg); err != nil {
+		return
+	}
+	db = sql.NewMySQL(&cfg)
+	cf = func() { db.Close() }
+	return
 }
+
+func (d *dao) GetDetail(ctx context.Context, id int64) (det *model.Detail, err error) {
+	det = new(model.Detail)
+	err = d.db.QueryRow(ctx, _queryDetail, id).Scan(&det.ID, &det.Name, &det.Price, &det.CreatedTime)
+	if err != nil {
+		log.Error("query detail err(%v)", err)
+	}
+	return
+}
+ */

@@ -1,0 +1,3 @@
+[2020/04/16 12:06:13.660] [ERROR] [grpc-access-log] ret=-500 error=sql: no rows in result set: -500 traceid=23da5ad3e25e984a:23da5ad3e25e984a:0:0 path=/Details/Get ts=0.071634 ip=172.27.0.16:9000 args=id:4  stack=-500
+sql: no rows in result set 
+[2020/04/16 12:06:13.664] [ERROR] [/Users/Jacob/Desktop/创新小组个人事务/1_kratos_microservice/apps/products/internal/server/http/server.go:60] get product by id error(get detail error: sql: no rows in result set: -500)

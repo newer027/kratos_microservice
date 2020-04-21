@@ -1,0 +1,462 @@
+[2020/04/21 03:16:30.678] [ERROR] [/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/recovery.go:26] http call panic: GET /products/id?id=1 HTTP/1.1
+Host: 127.0.0.1:8080
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Accept-Encoding: gzip, deflate, br
+Accept-Language: zh-CN,zh;q=0.9,de;q=0.8,en;q=0.7,ja;q=0.6,zh-TW;q=0.5,no;q=0.4
+Connection: keep-alive
+Cookie: _grpcui_csrf_token=SfweWfHgZFaoaysGp8Oc5iEkXoTJDZTkyxNwpwTMwS0
+Sec-Fetch-Dest: document
+Sec-Fetch-Mode: navigate
+Sec-Fetch-Site: none
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36
+
+
+runtime error: invalid memory address or nil pointer dereference
+goroutine 493 [running]:
+github.com/go-kratos/kratos/pkg/net/http/blademaster.Recovery.func1.1(0xc0000abea0)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/recovery.go:20 +0xb8
+panic(0xb2df00, 0x11e54a0)
+	/usr/local/Cellar/go/1.13.5/libexec/src/runtime/panic.go:679 +0x1b2
+github.com/newer027/kratos_microservice/apps/products/internal/service.(*Service).Get(0xc0003a7f00, 0xd16d80, 0xc0000abea0, 0x1, 0x1, 0x0, 0x0)
+	/Users/Jacob/Desktop/工作材料中个人材料/1_kratos_microservice/apps/products/internal/service/service.go:31 +0x75
+github.com/newer027/kratos_microservice/apps/products/internal/server/http.get(0xc0000abea0)
+	/Users/Jacob/Desktop/工作材料中个人材料/1_kratos_microservice/apps/products/internal/server/http/server.go:58 +0xf9
+github.com/go-kratos/kratos/pkg/net/http/blademaster.(*Context).Next(0xc0000abea0)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/context.go:64 +0x3b
+github.com/go-kratos/kratos/pkg/net/http/blademaster.Logger.func1(0xc0000abea0)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/logger.go:27 +0x127
+github.com/go-kratos/kratos/pkg/net/http/blademaster.HandlerFunc.ServeHTTP(0xc41d30, 0xc0000abea0)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/server.go:72 +0x30
+github.com/go-kratos/kratos/pkg/net/http/blademaster.(*Context).Next(0xc0000abea0)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/context.go:64 +0x3b
+github.com/go-kratos/kratos/pkg/net/http/blademaster.Trace.func1(0xc0000abea0)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/trace.go:38 +0x603
+github.com/go-kratos/kratos/pkg/net/http/blademaster.HandlerFunc.ServeHTTP(0xc41d58, 0xc0000abea0)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/server.go:72 +0x30
+github.com/go-kratos/kratos/pkg/net/http/blademaster.(*Context).Next(0xc0000abea0)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/context.go:64 +0x3b
+github.com/go-kratos/kratos/pkg/net/http/blademaster.Recovery.func1(0xc0000abea0)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/recovery.go:30 +0x5b
+github.com/go-kratos/kratos/pkg/net/http/blademaster.HandlerFunc.ServeHTTP(0xc41d50, 0xc0000abea0)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/server.go:72 +0x30
+github.com/go-kratos/kratos/pkg/net/http/blademaster.(*Context).Next(0xc0000abea0)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/context.go:64 +0x3b
+github.com/go-kratos/kratos/pkg/net/http/blademaster.(*Engine).handleContext(0xc000484280, 0xc0000abea0)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/server.go:322 +0x45b
+github.com/go-kratos/kratos/pkg/net/http/blademaster.(*Engine).ServeHTTP(0xc000484280, 0xd14a00, 0xc0003f01c0, 0xc0000f6400)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/server.go:493 +0xdc
+net/http.serverHandler.ServeHTTP(0xc0004321c0, 0xd14a00, 0xc0003f01c0, 0xc0000f6400)
+	/usr/local/Cellar/go/1.13.5/libexec/src/net/http/server.go:2802 +0xa4
+net/http.(*conn).serve(0xc0000ab040, 0xd16b00, 0xc000078fc0)
+	/usr/local/Cellar/go/1.13.5/libexec/src/net/http/server.go:1890 +0x875
+created by net/http.(*Server).Serve
+	/usr/local/Cellar/go/1.13.5/libexec/src/net/http/server.go:2928 +0x384
+
+
+[2020/04/21 03:16:35.758] [ERROR] [/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/recovery.go:26] http call panic: GET /products/id?id=1 HTTP/1.1
+Host: 127.0.0.1:8080
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Accept-Encoding: gzip, deflate, br
+Accept-Language: zh-CN,zh;q=0.9,de;q=0.8,en;q=0.7,ja;q=0.6,zh-TW;q=0.5,no;q=0.4
+Cache-Control: max-age=0
+Connection: keep-alive
+Cookie: _grpcui_csrf_token=SfweWfHgZFaoaysGp8Oc5iEkXoTJDZTkyxNwpwTMwS0
+Sec-Fetch-Dest: document
+Sec-Fetch-Mode: navigate
+Sec-Fetch-Site: cross-site
+Sec-Fetch-User: ?1
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36
+
+
+runtime error: invalid memory address or nil pointer dereference
+goroutine 493 [running]:
+github.com/go-kratos/kratos/pkg/net/http/blademaster.Recovery.func1.1(0xc000120c80)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/recovery.go:20 +0xb8
+panic(0xb2df00, 0x11e54a0)
+	/usr/local/Cellar/go/1.13.5/libexec/src/runtime/panic.go:679 +0x1b2
+github.com/newer027/kratos_microservice/apps/products/internal/service.(*Service).Get(0xc0003a7f00, 0xd16d80, 0xc000120c80, 0x1, 0x1, 0x0, 0x0)
+	/Users/Jacob/Desktop/工作材料中个人材料/1_kratos_microservice/apps/products/internal/service/service.go:31 +0x75
+github.com/newer027/kratos_microservice/apps/products/internal/server/http.get(0xc000120c80)
+	/Users/Jacob/Desktop/工作材料中个人材料/1_kratos_microservice/apps/products/internal/server/http/server.go:58 +0xf9
+github.com/go-kratos/kratos/pkg/net/http/blademaster.(*Context).Next(0xc000120c80)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/context.go:64 +0x3b
+github.com/go-kratos/kratos/pkg/net/http/blademaster.Logger.func1(0xc000120c80)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/logger.go:27 +0x127
+github.com/go-kratos/kratos/pkg/net/http/blademaster.HandlerFunc.ServeHTTP(0xc41d30, 0xc000120c80)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/server.go:72 +0x30
+github.com/go-kratos/kratos/pkg/net/http/blademaster.(*Context).Next(0xc000120c80)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/context.go:64 +0x3b
+github.com/go-kratos/kratos/pkg/net/http/blademaster.Trace.func1(0xc000120c80)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/trace.go:38 +0x603
+github.com/go-kratos/kratos/pkg/net/http/blademaster.HandlerFunc.ServeHTTP(0xc41d58, 0xc000120c80)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/server.go:72 +0x30
+github.com/go-kratos/kratos/pkg/net/http/blademaster.(*Context).Next(0xc000120c80)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/context.go:64 +0x3b
+github.com/go-kratos/kratos/pkg/net/http/blademaster.Recovery.func1(0xc000120c80)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/recovery.go:30 +0x5b
+github.com/go-kratos/kratos/pkg/net/http/blademaster.HandlerFunc.ServeHTTP(0xc41d50, 0xc000120c80)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/server.go:72 +0x30
+github.com/go-kratos/kratos/pkg/net/http/blademaster.(*Context).Next(0xc000120c80)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/context.go:64 +0x3b
+github.com/go-kratos/kratos/pkg/net/http/blademaster.(*Engine).handleContext(0xc000484280, 0xc000120c80)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/server.go:322 +0x45b
+github.com/go-kratos/kratos/pkg/net/http/blademaster.(*Engine).ServeHTTP(0xc000484280, 0xd14a00, 0xc0004328c0, 0xc0005ec600)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/server.go:493 +0xdc
+net/http.serverHandler.ServeHTTP(0xc0004321c0, 0xd14a00, 0xc0004328c0, 0xc0005ec600)
+	/usr/local/Cellar/go/1.13.5/libexec/src/net/http/server.go:2802 +0xa4
+net/http.(*conn).serve(0xc0000ab040, 0xd16b00, 0xc000078fc0)
+	/usr/local/Cellar/go/1.13.5/libexec/src/net/http/server.go:1890 +0x875
+created by net/http.(*Server).Serve
+	/usr/local/Cellar/go/1.13.5/libexec/src/net/http/server.go:2928 +0x384
+
+
+[2020/04/21 03:35:36.315] [ERROR] [/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/recovery.go:26] http call panic: GET /products/id?id=1 HTTP/1.1
+Host: 127.0.0.1:8080
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Accept-Encoding: gzip, deflate, br
+Accept-Language: zh-CN,zh;q=0.9,de;q=0.8,en;q=0.7,ja;q=0.6,zh-TW;q=0.5,no;q=0.4
+Cache-Control: max-age=0
+Connection: keep-alive
+Cookie: _grpcui_csrf_token=SfweWfHgZFaoaysGp8Oc5iEkXoTJDZTkyxNwpwTMwS0
+Sec-Fetch-Dest: document
+Sec-Fetch-Mode: navigate
+Sec-Fetch-Site: cross-site
+Sec-Fetch-User: ?1
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36
+
+
+runtime error: invalid memory address or nil pointer dereference
+goroutine 149 [running]:
+github.com/go-kratos/kratos/pkg/net/http/blademaster.Recovery.func1.1(0xc0001da0a0)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/recovery.go:20 +0xb8
+panic(0xb2df00, 0x11e54a0)
+	/usr/local/Cellar/go/1.13.5/libexec/src/runtime/panic.go:679 +0x1b2
+github.com/newer027/kratos_microservice/apps/products/internal/service.(*Service).Get(0xc000095c00, 0xd16d80, 0xc0001da0a0, 0x1, 0x1, 0x0, 0x0)
+	/Users/Jacob/Desktop/工作材料中个人材料/1_kratos_microservice/apps/products/internal/service/service.go:41 +0x8d
+github.com/newer027/kratos_microservice/apps/products/internal/server/http.get(0xc0001da0a0)
+	/Users/Jacob/Desktop/工作材料中个人材料/1_kratos_microservice/apps/products/internal/server/http/server.go:58 +0xf9
+github.com/go-kratos/kratos/pkg/net/http/blademaster.(*Context).Next(0xc0001da0a0)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/context.go:64 +0x3b
+github.com/go-kratos/kratos/pkg/net/http/blademaster.Logger.func1(0xc0001da0a0)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/logger.go:27 +0x127
+github.com/go-kratos/kratos/pkg/net/http/blademaster.HandlerFunc.ServeHTTP(0xc41d30, 0xc0001da0a0)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/server.go:72 +0x30
+github.com/go-kratos/kratos/pkg/net/http/blademaster.(*Context).Next(0xc0001da0a0)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/context.go:64 +0x3b
+github.com/go-kratos/kratos/pkg/net/http/blademaster.Trace.func1(0xc0001da0a0)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/trace.go:38 +0x603
+github.com/go-kratos/kratos/pkg/net/http/blademaster.HandlerFunc.ServeHTTP(0xc41d58, 0xc0001da0a0)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/server.go:72 +0x30
+github.com/go-kratos/kratos/pkg/net/http/blademaster.(*Context).Next(0xc0001da0a0)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/context.go:64 +0x3b
+github.com/go-kratos/kratos/pkg/net/http/blademaster.Recovery.func1(0xc0001da0a0)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/recovery.go:30 +0x5b
+github.com/go-kratos/kratos/pkg/net/http/blademaster.HandlerFunc.ServeHTTP(0xc41d50, 0xc0001da0a0)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/server.go:72 +0x30
+github.com/go-kratos/kratos/pkg/net/http/blademaster.(*Context).Next(0xc0001da0a0)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/context.go:64 +0x3b
+github.com/go-kratos/kratos/pkg/net/http/blademaster.(*Engine).handleContext(0xc0000bb680, 0xc0001da0a0)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/server.go:322 +0x45b
+github.com/go-kratos/kratos/pkg/net/http/blademaster.(*Engine).ServeHTTP(0xc0000bb680, 0xd14a00, 0xc00045c460, 0xc000164a00)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/server.go:493 +0xdc
+net/http.serverHandler.ServeHTTP(0xc00045c1c0, 0xd14a00, 0xc00045c460, 0xc000164a00)
+	/usr/local/Cellar/go/1.13.5/libexec/src/net/http/server.go:2802 +0xa4
+net/http.(*conn).serve(0xc000120140, 0xd16b00, 0xc000078100)
+	/usr/local/Cellar/go/1.13.5/libexec/src/net/http/server.go:1890 +0x875
+created by net/http.(*Server).Serve
+	/usr/local/Cellar/go/1.13.5/libexec/src/net/http/server.go:2928 +0x384
+
+
+[2020/04/21 03:35:37.861] [ERROR] [/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/recovery.go:26] http call panic: GET /products/id?id=1 HTTP/1.1
+Host: 127.0.0.1:8080
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Accept-Encoding: gzip, deflate, br
+Accept-Language: zh-CN,zh;q=0.9,de;q=0.8,en;q=0.7,ja;q=0.6,zh-TW;q=0.5,no;q=0.4
+Cache-Control: max-age=0
+Connection: keep-alive
+Cookie: _grpcui_csrf_token=SfweWfHgZFaoaysGp8Oc5iEkXoTJDZTkyxNwpwTMwS0
+Sec-Fetch-Dest: document
+Sec-Fetch-Mode: navigate
+Sec-Fetch-Site: cross-site
+Sec-Fetch-User: ?1
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36
+
+
+runtime error: invalid memory address or nil pointer dereference
+goroutine 149 [running]:
+github.com/go-kratos/kratos/pkg/net/http/blademaster.Recovery.func1.1(0xc0001daaa0)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/recovery.go:20 +0xb8
+panic(0xb2df00, 0x11e54a0)
+	/usr/local/Cellar/go/1.13.5/libexec/src/runtime/panic.go:679 +0x1b2
+github.com/newer027/kratos_microservice/apps/products/internal/service.(*Service).Get(0xc000095c00, 0xd16d80, 0xc0001daaa0, 0x1, 0x1, 0x0, 0x0)
+	/Users/Jacob/Desktop/工作材料中个人材料/1_kratos_microservice/apps/products/internal/service/service.go:41 +0x8d
+github.com/newer027/kratos_microservice/apps/products/internal/server/http.get(0xc0001daaa0)
+	/Users/Jacob/Desktop/工作材料中个人材料/1_kratos_microservice/apps/products/internal/server/http/server.go:58 +0xf9
+github.com/go-kratos/kratos/pkg/net/http/blademaster.(*Context).Next(0xc0001daaa0)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/context.go:64 +0x3b
+github.com/go-kratos/kratos/pkg/net/http/blademaster.Logger.func1(0xc0001daaa0)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/logger.go:27 +0x127
+github.com/go-kratos/kratos/pkg/net/http/blademaster.HandlerFunc.ServeHTTP(0xc41d30, 0xc0001daaa0)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/server.go:72 +0x30
+github.com/go-kratos/kratos/pkg/net/http/blademaster.(*Context).Next(0xc0001daaa0)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/context.go:64 +0x3b
+github.com/go-kratos/kratos/pkg/net/http/blademaster.Trace.func1(0xc0001daaa0)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/trace.go:38 +0x603
+github.com/go-kratos/kratos/pkg/net/http/blademaster.HandlerFunc.ServeHTTP(0xc41d58, 0xc0001daaa0)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/server.go:72 +0x30
+github.com/go-kratos/kratos/pkg/net/http/blademaster.(*Context).Next(0xc0001daaa0)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/context.go:64 +0x3b
+github.com/go-kratos/kratos/pkg/net/http/blademaster.Recovery.func1(0xc0001daaa0)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/recovery.go:30 +0x5b
+github.com/go-kratos/kratos/pkg/net/http/blademaster.HandlerFunc.ServeHTTP(0xc41d50, 0xc0001daaa0)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/server.go:72 +0x30
+github.com/go-kratos/kratos/pkg/net/http/blademaster.(*Context).Next(0xc0001daaa0)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/context.go:64 +0x3b
+github.com/go-kratos/kratos/pkg/net/http/blademaster.(*Engine).handleContext(0xc0000bb680, 0xc0001daaa0)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/server.go:322 +0x45b
+github.com/go-kratos/kratos/pkg/net/http/blademaster.(*Engine).ServeHTTP(0xc0000bb680, 0xd14a00, 0xc00045c540, 0xc0000f6b00)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/server.go:493 +0xdc
+net/http.serverHandler.ServeHTTP(0xc00045c1c0, 0xd14a00, 0xc00045c540, 0xc0000f6b00)
+	/usr/local/Cellar/go/1.13.5/libexec/src/net/http/server.go:2802 +0xa4
+net/http.(*conn).serve(0xc000120140, 0xd16b00, 0xc000078100)
+	/usr/local/Cellar/go/1.13.5/libexec/src/net/http/server.go:1890 +0x875
+created by net/http.(*Server).Serve
+	/usr/local/Cellar/go/1.13.5/libexec/src/net/http/server.go:2928 +0x384
+
+
+[2020/04/21 03:35:38.703] [ERROR] [/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/recovery.go:26] http call panic: GET /products/id?id=1 HTTP/1.1
+Host: 127.0.0.1:8080
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Accept-Encoding: gzip, deflate, br
+Accept-Language: zh-CN,zh;q=0.9,de;q=0.8,en;q=0.7,ja;q=0.6,zh-TW;q=0.5,no;q=0.4
+Cache-Control: max-age=0
+Connection: keep-alive
+Cookie: _grpcui_csrf_token=SfweWfHgZFaoaysGp8Oc5iEkXoTJDZTkyxNwpwTMwS0
+Sec-Fetch-Dest: document
+Sec-Fetch-Mode: navigate
+Sec-Fetch-Site: cross-site
+Sec-Fetch-User: ?1
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36
+
+
+runtime error: invalid memory address or nil pointer dereference
+goroutine 149 [running]:
+github.com/go-kratos/kratos/pkg/net/http/blademaster.Recovery.func1.1(0xc0001dae60)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/recovery.go:20 +0xb8
+panic(0xb2df00, 0x11e54a0)
+	/usr/local/Cellar/go/1.13.5/libexec/src/runtime/panic.go:679 +0x1b2
+github.com/newer027/kratos_microservice/apps/products/internal/service.(*Service).Get(0xc000095c00, 0xd16d80, 0xc0001dae60, 0x1, 0x1, 0x0, 0x0)
+	/Users/Jacob/Desktop/工作材料中个人材料/1_kratos_microservice/apps/products/internal/service/service.go:41 +0x8d
+github.com/newer027/kratos_microservice/apps/products/internal/server/http.get(0xc0001dae60)
+	/Users/Jacob/Desktop/工作材料中个人材料/1_kratos_microservice/apps/products/internal/server/http/server.go:58 +0xf9
+github.com/go-kratos/kratos/pkg/net/http/blademaster.(*Context).Next(0xc0001dae60)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/context.go:64 +0x3b
+github.com/go-kratos/kratos/pkg/net/http/blademaster.Logger.func1(0xc0001dae60)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/logger.go:27 +0x127
+github.com/go-kratos/kratos/pkg/net/http/blademaster.HandlerFunc.ServeHTTP(0xc41d30, 0xc0001dae60)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/server.go:72 +0x30
+github.com/go-kratos/kratos/pkg/net/http/blademaster.(*Context).Next(0xc0001dae60)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/context.go:64 +0x3b
+github.com/go-kratos/kratos/pkg/net/http/blademaster.Trace.func1(0xc0001dae60)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/trace.go:38 +0x603
+github.com/go-kratos/kratos/pkg/net/http/blademaster.HandlerFunc.ServeHTTP(0xc41d58, 0xc0001dae60)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/server.go:72 +0x30
+github.com/go-kratos/kratos/pkg/net/http/blademaster.(*Context).Next(0xc0001dae60)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/context.go:64 +0x3b
+github.com/go-kratos/kratos/pkg/net/http/blademaster.Recovery.func1(0xc0001dae60)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/recovery.go:30 +0x5b
+github.com/go-kratos/kratos/pkg/net/http/blademaster.HandlerFunc.ServeHTTP(0xc41d50, 0xc0001dae60)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/server.go:72 +0x30
+github.com/go-kratos/kratos/pkg/net/http/blademaster.(*Context).Next(0xc0001dae60)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/context.go:64 +0x3b
+github.com/go-kratos/kratos/pkg/net/http/blademaster.(*Engine).handleContext(0xc0000bb680, 0xc0001dae60)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/server.go:322 +0x45b
+github.com/go-kratos/kratos/pkg/net/http/blademaster.(*Engine).ServeHTTP(0xc0000bb680, 0xd14a00, 0xc00045c620, 0xc000165b00)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/server.go:493 +0xdc
+net/http.serverHandler.ServeHTTP(0xc00045c1c0, 0xd14a00, 0xc00045c620, 0xc000165b00)
+	/usr/local/Cellar/go/1.13.5/libexec/src/net/http/server.go:2802 +0xa4
+net/http.(*conn).serve(0xc000120140, 0xd16b00, 0xc000078100)
+	/usr/local/Cellar/go/1.13.5/libexec/src/net/http/server.go:1890 +0x875
+created by net/http.(*Server).Serve
+	/usr/local/Cellar/go/1.13.5/libexec/src/net/http/server.go:2928 +0x384
+
+
+[2020/04/21 03:38:15.583] [ERROR] [/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/recovery.go:26] http call panic: GET /products/id?id=1 HTTP/1.1
+Host: 127.0.0.1:8080
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Accept-Encoding: gzip, deflate, br
+Accept-Language: zh-CN,zh;q=0.9,de;q=0.8,en;q=0.7,ja;q=0.6,zh-TW;q=0.5,no;q=0.4
+Cache-Control: max-age=0
+Connection: keep-alive
+Cookie: _grpcui_csrf_token=SfweWfHgZFaoaysGp8Oc5iEkXoTJDZTkyxNwpwTMwS0
+Sec-Fetch-Dest: document
+Sec-Fetch-Mode: navigate
+Sec-Fetch-Site: none
+Sec-Fetch-User: ?1
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36
+
+
+runtime error: invalid memory address or nil pointer dereference
+goroutine 149 [running]:
+github.com/go-kratos/kratos/pkg/net/http/blademaster.Recovery.func1.1(0xc000120c80)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/recovery.go:20 +0xb8
+panic(0xb2df00, 0x11e54a0)
+	/usr/local/Cellar/go/1.13.5/libexec/src/runtime/panic.go:679 +0x1b2
+github.com/newer027/kratos_microservice/apps/products/internal/service.(*Service).Get(0xc000095c00, 0xd16d80, 0xc000120c80, 0x1, 0x1, 0x0, 0x0)
+	/Users/Jacob/Desktop/工作材料中个人材料/1_kratos_microservice/apps/products/internal/service/service.go:41 +0x8d
+github.com/newer027/kratos_microservice/apps/products/internal/server/http.get(0xc000120c80)
+	/Users/Jacob/Desktop/工作材料中个人材料/1_kratos_microservice/apps/products/internal/server/http/server.go:58 +0xf9
+github.com/go-kratos/kratos/pkg/net/http/blademaster.(*Context).Next(0xc000120c80)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/context.go:64 +0x3b
+github.com/go-kratos/kratos/pkg/net/http/blademaster.Logger.func1(0xc000120c80)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/logger.go:27 +0x127
+github.com/go-kratos/kratos/pkg/net/http/blademaster.HandlerFunc.ServeHTTP(0xc41d30, 0xc000120c80)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/server.go:72 +0x30
+github.com/go-kratos/kratos/pkg/net/http/blademaster.(*Context).Next(0xc000120c80)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/context.go:64 +0x3b
+github.com/go-kratos/kratos/pkg/net/http/blademaster.Trace.func1(0xc000120c80)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/trace.go:38 +0x603
+github.com/go-kratos/kratos/pkg/net/http/blademaster.HandlerFunc.ServeHTTP(0xc41d58, 0xc000120c80)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/server.go:72 +0x30
+github.com/go-kratos/kratos/pkg/net/http/blademaster.(*Context).Next(0xc000120c80)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/context.go:64 +0x3b
+github.com/go-kratos/kratos/pkg/net/http/blademaster.Recovery.func1(0xc000120c80)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/recovery.go:30 +0x5b
+github.com/go-kratos/kratos/pkg/net/http/blademaster.HandlerFunc.ServeHTTP(0xc41d50, 0xc000120c80)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/server.go:72 +0x30
+github.com/go-kratos/kratos/pkg/net/http/blademaster.(*Context).Next(0xc000120c80)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/context.go:64 +0x3b
+github.com/go-kratos/kratos/pkg/net/http/blademaster.(*Engine).handleContext(0xc0000bb680, 0xc000120c80)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/server.go:322 +0x45b
+github.com/go-kratos/kratos/pkg/net/http/blademaster.(*Engine).ServeHTTP(0xc0000bb680, 0xd14a00, 0xc0003de540, 0xc0000f7700)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/server.go:493 +0xdc
+net/http.serverHandler.ServeHTTP(0xc00045c1c0, 0xd14a00, 0xc0003de540, 0xc0000f7700)
+	/usr/local/Cellar/go/1.13.5/libexec/src/net/http/server.go:2802 +0xa4
+net/http.(*conn).serve(0xc000120140, 0xd16b00, 0xc000078100)
+	/usr/local/Cellar/go/1.13.5/libexec/src/net/http/server.go:1890 +0x875
+created by net/http.(*Server).Serve
+	/usr/local/Cellar/go/1.13.5/libexec/src/net/http/server.go:2928 +0x384
+
+
+[2020/04/21 04:34:44.989] [ERROR] [/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/recovery.go:26] http call panic: GET /products/id?id=1 HTTP/1.1
+Host: 127.0.0.1:8080
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Accept-Encoding: gzip, deflate, br
+Accept-Language: zh-CN,zh;q=0.9,de;q=0.8,en;q=0.7,ja;q=0.6,zh-TW;q=0.5,no;q=0.4
+Cache-Control: max-age=0
+Connection: keep-alive
+Cookie: _grpcui_csrf_token=SfweWfHgZFaoaysGp8Oc5iEkXoTJDZTkyxNwpwTMwS0
+Sec-Fetch-Dest: document
+Sec-Fetch-Mode: navigate
+Sec-Fetch-Site: cross-site
+Sec-Fetch-User: ?1
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36
+
+
+runtime error: invalid memory address or nil pointer dereference
+goroutine 170 [running]:
+github.com/go-kratos/kratos/pkg/net/http/blademaster.Recovery.func1.1(0xc0000aa280)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/recovery.go:20 +0xb8
+panic(0xb2df00, 0x11e54a0)
+	/usr/local/Cellar/go/1.13.5/libexec/src/runtime/panic.go:679 +0x1b2
+github.com/newer027/kratos_microservice/apps/products/internal/service.(*Service).Get(0xc000328f20, 0xd16d80, 0xc0000aa280, 0x1, 0x1, 0x0, 0x0)
+	/Users/Jacob/Desktop/工作材料中个人材料/1_kratos_microservice/apps/products/internal/service/service.go:41 +0x8d
+github.com/newer027/kratos_microservice/apps/products/internal/server/http.get(0xc0000aa280)
+	/Users/Jacob/Desktop/工作材料中个人材料/1_kratos_microservice/apps/products/internal/server/http/server.go:58 +0xf9
+github.com/go-kratos/kratos/pkg/net/http/blademaster.(*Context).Next(0xc0000aa280)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/context.go:64 +0x3b
+github.com/go-kratos/kratos/pkg/net/http/blademaster.Logger.func1(0xc0000aa280)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/logger.go:27 +0x127
+github.com/go-kratos/kratos/pkg/net/http/blademaster.HandlerFunc.ServeHTTP(0xc41d30, 0xc0000aa280)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/server.go:72 +0x30
+github.com/go-kratos/kratos/pkg/net/http/blademaster.(*Context).Next(0xc0000aa280)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/context.go:64 +0x3b
+github.com/go-kratos/kratos/pkg/net/http/blademaster.Trace.func1(0xc0000aa280)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/trace.go:38 +0x603
+github.com/go-kratos/kratos/pkg/net/http/blademaster.HandlerFunc.ServeHTTP(0xc41d58, 0xc0000aa280)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/server.go:72 +0x30
+github.com/go-kratos/kratos/pkg/net/http/blademaster.(*Context).Next(0xc0000aa280)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/context.go:64 +0x3b
+github.com/go-kratos/kratos/pkg/net/http/blademaster.Recovery.func1(0xc0000aa280)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/recovery.go:30 +0x5b
+github.com/go-kratos/kratos/pkg/net/http/blademaster.HandlerFunc.ServeHTTP(0xc41d50, 0xc0000aa280)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/server.go:72 +0x30
+github.com/go-kratos/kratos/pkg/net/http/blademaster.(*Context).Next(0xc0000aa280)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/context.go:64 +0x3b
+github.com/go-kratos/kratos/pkg/net/http/blademaster.(*Engine).handleContext(0xc0000bb680, 0xc0000aa280)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/server.go:322 +0x45b
+github.com/go-kratos/kratos/pkg/net/http/blademaster.(*Engine).ServeHTTP(0xc0000bb680, 0xd14a00, 0xc0003cc2a0, 0xc0000f7100)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/server.go:493 +0xdc
+net/http.serverHandler.ServeHTTP(0xc00044a1c0, 0xd14a00, 0xc0003cc2a0, 0xc0000f7100)
+	/usr/local/Cellar/go/1.13.5/libexec/src/net/http/server.go:2802 +0xa4
+net/http.(*conn).serve(0xc0000aa0a0, 0xd16b00, 0xc000030180)
+	/usr/local/Cellar/go/1.13.5/libexec/src/net/http/server.go:1890 +0x875
+created by net/http.(*Server).Serve
+	/usr/local/Cellar/go/1.13.5/libexec/src/net/http/server.go:2928 +0x384
+
+
+[2020/04/21 04:34:46.205] [ERROR] [/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/recovery.go:26] http call panic: GET /products/id?id=1 HTTP/1.1
+Host: 127.0.0.1:8080
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Accept-Encoding: gzip, deflate, br
+Accept-Language: zh-CN,zh;q=0.9,de;q=0.8,en;q=0.7,ja;q=0.6,zh-TW;q=0.5,no;q=0.4
+Cache-Control: max-age=0
+Connection: keep-alive
+Cookie: _grpcui_csrf_token=SfweWfHgZFaoaysGp8Oc5iEkXoTJDZTkyxNwpwTMwS0
+Sec-Fetch-Dest: document
+Sec-Fetch-Mode: navigate
+Sec-Fetch-Site: cross-site
+Sec-Fetch-User: ?1
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36
+
+
+runtime error: invalid memory address or nil pointer dereference
+goroutine 170 [running]:
+github.com/go-kratos/kratos/pkg/net/http/blademaster.Recovery.func1.1(0xc0000aa640)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/recovery.go:20 +0xb8
+panic(0xb2df00, 0x11e54a0)
+	/usr/local/Cellar/go/1.13.5/libexec/src/runtime/panic.go:679 +0x1b2
+github.com/newer027/kratos_microservice/apps/products/internal/service.(*Service).Get(0xc000328f20, 0xd16d80, 0xc0000aa640, 0x1, 0x1, 0x0, 0x0)
+	/Users/Jacob/Desktop/工作材料中个人材料/1_kratos_microservice/apps/products/internal/service/service.go:41 +0x8d
+github.com/newer027/kratos_microservice/apps/products/internal/server/http.get(0xc0000aa640)
+	/Users/Jacob/Desktop/工作材料中个人材料/1_kratos_microservice/apps/products/internal/server/http/server.go:58 +0xf9
+github.com/go-kratos/kratos/pkg/net/http/blademaster.(*Context).Next(0xc0000aa640)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/context.go:64 +0x3b
+github.com/go-kratos/kratos/pkg/net/http/blademaster.Logger.func1(0xc0000aa640)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/logger.go:27 +0x127
+github.com/go-kratos/kratos/pkg/net/http/blademaster.HandlerFunc.ServeHTTP(0xc41d30, 0xc0000aa640)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/server.go:72 +0x30
+github.com/go-kratos/kratos/pkg/net/http/blademaster.(*Context).Next(0xc0000aa640)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/context.go:64 +0x3b
+github.com/go-kratos/kratos/pkg/net/http/blademaster.Trace.func1(0xc0000aa640)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/trace.go:38 +0x603
+github.com/go-kratos/kratos/pkg/net/http/blademaster.HandlerFunc.ServeHTTP(0xc41d58, 0xc0000aa640)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/server.go:72 +0x30
+github.com/go-kratos/kratos/pkg/net/http/blademaster.(*Context).Next(0xc0000aa640)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/context.go:64 +0x3b
+github.com/go-kratos/kratos/pkg/net/http/blademaster.Recovery.func1(0xc0000aa640)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/recovery.go:30 +0x5b
+github.com/go-kratos/kratos/pkg/net/http/blademaster.HandlerFunc.ServeHTTP(0xc41d50, 0xc0000aa640)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/server.go:72 +0x30
+github.com/go-kratos/kratos/pkg/net/http/blademaster.(*Context).Next(0xc0000aa640)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/context.go:64 +0x3b
+github.com/go-kratos/kratos/pkg/net/http/blademaster.(*Engine).handleContext(0xc0000bb680, 0xc0000aa640)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/server.go:322 +0x45b
+github.com/go-kratos/kratos/pkg/net/http/blademaster.(*Engine).ServeHTTP(0xc0000bb680, 0xd14a00, 0xc0003cc380, 0xc0000f7800)
+	/Users/Jacob/go/pkg/mod/github.com/go-kratos/kratos@v0.4.2/pkg/net/http/blademaster/server.go:493 +0xdc
+net/http.serverHandler.ServeHTTP(0xc00044a1c0, 0xd14a00, 0xc0003cc380, 0xc0000f7800)
+	/usr/local/Cellar/go/1.13.5/libexec/src/net/http/server.go:2802 +0xa4
+net/http.(*conn).serve(0xc0000aa0a0, 0xd16b00, 0xc000030180)
+	/usr/local/Cellar/go/1.13.5/libexec/src/net/http/server.go:1890 +0x875
+created by net/http.(*Server).Serve
+	/usr/local/Cellar/go/1.13.5/libexec/src/net/http/server.go:2928 +0x384
+
+

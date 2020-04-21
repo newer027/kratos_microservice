@@ -75,9 +75,19 @@ CREATE TABLE `reviews` (
 -- Records of reviews
 -- ----------------------------
 BEGIN;
-INSERT INTO `reviews` VALUES (1, 1, 'good', '2019-07-31 19:48:47');
-INSERT INTO `reviews` VALUES (2, 2, 'bad', '2019-07-31 19:49:12');
-INSERT INTO `reviews` VALUES (3, 3, 'good', '2019-07-31 20:15:56');
+INSERT INTO `reviews` VALUES (1, 1, 'goodgoodgood good', '2019-07-31 19:48:47');
+INSERT INTO `reviews` VALUES (2, 1, 'good good good good', '2019-07-31 19:48:47');
+INSERT INTO `reviews` VALUES (3, 1, 'goo0000d', '2019-07-31 19:48:47');
+INSERT INTO `reviews` VALUES (4, 1, 'goooood', '2019-07-31 19:48:47');
+INSERT INTO `reviews` VALUES (5, 1, 'good and better', '2019-07-31 19:48:47');
+INSERT INTO `reviews` VALUES (6, 2, 'too bad', '2019-07-31 19:49:12');
+INSERT INTO `reviews` VALUES (7, 2, 'baaad', '2019-07-31 19:49:12');
+INSERT INTO `reviews` VALUES (8, 2, 'baaaaad', '2019-07-31 19:49:12');
+INSERT INTO `reviews` VALUES (9, 2, 'bad', '2019-07-31 19:49:12');
+INSERT INTO `reviews` VALUES (10, 3, 'go1000od', '2019-07-31 20:15:56');
+INSERT INTO `reviews` VALUES (11, 3, 'goooood', '2019-07-31 20:15:56');
+INSERT INTO `reviews` VALUES (12, 3, 'go100023od', '2019-07-31 20:15:56');
+INSERT INTO `reviews` VALUES (13, 3, 'go-----od', '2019-07-31 20:15:56');
 COMMIT;
 
 SET FOREIGN_KEY_CHECKS = 1;

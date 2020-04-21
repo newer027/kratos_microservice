@@ -2,18 +2,19 @@ package service
 
 import (
 	"context"
-	"fmt"
+	"github.com/pkg/errors"
+	"github.com/golang/protobuf/ptypes"
 
 	pb "github.com/newer027/kratos_microservice/apps/reviews/api"
 	"github.com/newer027/kratos_microservice/apps/reviews/internal/dao"
+	"github.com/newer027/kratos_microservice/apps/reviews/internal/model"
 
 	"github.com/go-kratos/kratos/pkg/conf/paladin"
-
 	"github.com/golang/protobuf/ptypes/empty"
 	"github.com/google/wire"
 )
 
-var Provider = wire.NewSet(New, wire.Bind(new(pb.DemoServer), new(*Service)))
+var Provider = wire.NewSet(New, wire.Bind(new(pb.ReviewsServer), new(*Service)))
 
 // Service service.
 type Service struct {
@@ -32,19 +33,29 @@ func New(d dao.Dao) (s *Service, cf func(), err error) {
 	return
 }
 
-// SayHello grpc demo func.
-func (s *Service) SayHello(ctx context.Context, req *pb.HelloReq) (reply *empty.Empty, err error) {
-	reply = new(empty.Empty)
-	fmt.Printf("hello %s", req.Name)
-	return
-}
-
-// SayHelloURL bm demo func.
-func (s *Service) SayHelloURL(ctx context.Context, req *pb.HelloReq) (reply *pb.HelloResp, err error) {
-	reply = &pb.HelloResp{
-		Content: "hello " + req.Name,
+// Get bm demo func.
+func (s *Service) Query(ctx context.Context, req *pb.QueryReviewsRequest) (resp *pb.QueryReviewsResponse, err error) {
+	resp = &pb.QueryReviewsResponse{
+		Reviews: make([]*pb.Review, 0),
 	}
-	fmt.Printf("hello url %s", req.Name)
+	var res []*model.Review
+	if res, err = s.dao.Review(ctx, req.ProductID); err != nil {
+		return nil, errors.Wrap(err, "Reviews service get reviews error")
+	}
+
+	for _, v := range res {
+		ut, err := ptypes.TimestampProto(v.CreatedTime)
+		if err != nil {
+			return nil, err
+		}
+		tmp := &pb.Review{
+			Id:          	int64(v.ID),
+			ProductID:      v.ProductID,
+			Message:       	v.Message,
+			CreatedTime: 	ut,
+		}
+		resp.Reviews = append(resp.Reviews, tmp)
+	}
 	return
 }
 

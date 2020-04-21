@@ -2,11 +2,13 @@ package http
 
 import (
 	"net/http"
-	"github.com/newer027/kratos_microservice/apps/products/internal/service"
+	"strconv"
 
 	"github.com/go-kratos/kratos/pkg/conf/paladin"
-	bm "github.com/go-kratos/kratos/pkg/net/http/blademaster"
+	"github.com/newer027/kratos_microservice/apps/products/internal/service"
+
 	"github.com/go-kratos/kratos/pkg/log"
+	bm "github.com/go-kratos/kratos/pkg/net/http/blademaster"
 )
 
 var svc *service.Service
@@ -47,16 +49,16 @@ func ping(ctx *bm.Context) {
 
 // example for http request handler.
 func get(ctx *bm.Context) {
-	var ID int64
-	if idI, exists := ctx.Get("id"); exists {
-		ID = idI.(int64)
+	params := ctx.Request.Form
+	ID, err := strconv.ParseInt(params.Get("id"), 10, 64)
+	if err != nil {
+		log.Warn("%v", err)
+		return
 	}
-
 	p, err := svc.Get(ctx, ID)
 	if err != nil {
 		log.Error("get product by id error(%v)", err)
 		return
 	}
-
 	ctx.JSON(p, nil)
 }

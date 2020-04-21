@@ -1,7 +1,7 @@
 [Client]
 	name = "demo"
 	proto = "tcp"
-	addr = "127.0.0.1:6379"
+	addr = "redis:6379"
 	idle = 10
 	active = 10
 	dialTimeout = "1s"

@@ -10,6 +10,7 @@ import (
 	timestamp "github.com/golang/protobuf/ptypes/timestamp"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
+	empty "github.com/golang/protobuf/ptypes/empty"
 	status "google.golang.org/grpc/status"
 	math "math"
 )
@@ -164,6 +165,7 @@ const _ = grpc.SupportPackageIsVersion4
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type RatingsClient interface {
+	Ping(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (*empty.Empty, error)
 	Get(ctx context.Context, in *GetRatingRequest, opts ...grpc.CallOption) (*Rating, error)
 }
 
@@ -173,6 +175,15 @@ type ratingsClient struct {
 
 func NewRatingsClient(cc *grpc.ClientConn) RatingsClient {
 	return &ratingsClient{cc}
+}
+
+func (c *ratingsClient) Ping(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (*empty.Empty, error) {
+	out := new(empty.Empty)
+	err := c.cc.Invoke(ctx, "/Ratings/Ping", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *ratingsClient) Get(ctx context.Context, in *GetRatingRequest, opts ...grpc.CallOption) (*Rating, error) {
@@ -187,10 +198,15 @@ func (c *ratingsClient) Get(ctx context.Context, in *GetRatingRequest, opts ...g
 // RatingsServer is the server API for Ratings service.
 type RatingsServer interface {
 	Get(context.Context, *GetRatingRequest) (*Rating, error)
+	Ping(context.Context, *empty.Empty) (*empty.Empty, error)
 }
 
 // UnimplementedRatingsServer can be embedded to have forward compatible implementations.
 type UnimplementedRatingsServer struct {
+}
+
+func (*UnimplementedRatingsServer) Ping(ctx context.Context, req *empty.Empty) (*empty.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Ping not implemented")
 }
 
 func (*UnimplementedRatingsServer) Get(ctx context.Context, req *GetRatingRequest) (*Rating, error) {
@@ -219,10 +235,32 @@ func _Ratings_Get_Handler(srv interface{}, ctx context.Context, dec func(interfa
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Ratings_Ping_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(empty.Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RatingsServer).Ping(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/Ratings/Ping",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RatingsServer).Ping(ctx, req.(*empty.Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _Ratings_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "Ratings",
 	HandlerType: (*RatingsServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "Ping",
+			Handler:    _Ratings_Ping_Handler,
+		},
 		{
 			MethodName: "Get",
 			Handler:    _Ratings_Get_Handler,
