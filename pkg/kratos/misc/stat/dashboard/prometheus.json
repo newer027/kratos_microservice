@@ -3203,7 +3203,7 @@
           "targets": [
             {
               "dsType": "influxdb",
-              "expr": "sum(rate(http_client_requests_duration_ms_count{job=\"details\",path!~\".*/discovery/.*\"}[5m])) by (path)",
+              "expr": "sum(rate(http_client_requests_duration_ms_count{job=\"details\",path!=\".*/discovery/.*\"}[5m])) by (path)",
               "format": "time_series",
               "groupBy": [
                 {
@@ -3324,7 +3324,7 @@
           "targets": [
             {
               "dsType": "influxdb",
-              "expr": "avg(increase(http_client_requests_duration_ms_sum{job=\"details\",path!~\".*/discovery/.*\"}[5m])/ increase(http_client_requests_duration_ms_count{job=\"details\",path!~\".*/discovery/.*\"}[5m]) > 0 ) by (path)",
+              "expr": "avg(increase(http_client_requests_duration_ms_sum{job=\"details\",path!=\".*/discovery/.*\"}[5m])/ increase(http_client_requests_duration_ms_count{job=\"details\",path!=\".*/discovery/.*\"}[5m]) > 0 ) by (path)",
               "format": "time_series",
               "groupBy": [
                 {

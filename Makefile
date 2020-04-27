@@ -61,7 +61,7 @@ rules:
 	 	jsonnet  -o ./configs/prometheus/rules/$$app.yml --ext-str app=$$app  ./scripts/prometheus/rules.jsonnet ; \
 	done
 .PHONY: docker
-docker-compose: disbuild build dash rules
+docker-compose: disbuild build # dash rules
 	docker-compose -f deployments/docker-compose.yml up --build -d
 all: lint cover docker
 
